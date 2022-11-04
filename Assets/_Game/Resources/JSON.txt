@@ -1,0 +1,34 @@
+{
+	"pieces": [
+		{
+			"theme": "Animals",
+			"image": "abelha",
+			"sound": "abelha.mp3"
+		},
+		{
+			"theme": "Animals",
+			"image": "image-2",
+			"sound": "sound-2"
+		},
+		{
+			"theme": "Animals",
+			"image": "image-3",
+			"sound": "sound-3"
+		},
+		{
+			"theme": "Animals",
+			"image": "image-4",
+			"sound": "sound-4"
+		},
+		{
+			"theme": "Animals",
+			"image": "image-5",
+			"sound": "sound-5"
+		},
+		{
+			"theme": "Animals",
+			"image": "image-6",
+			"sound": "sound-6"
+		}	
+	]
+}
