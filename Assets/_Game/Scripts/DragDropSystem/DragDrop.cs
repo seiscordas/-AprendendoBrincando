@@ -12,6 +12,8 @@ namespace LearningByPlaying
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
 
+        public static bool IsOverChoiceSlot { get; set; }
+
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
@@ -25,22 +27,26 @@ namespace LearningByPlaying
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            //Debug.Log("OnBeginDrag");
             canvasGroup.alpha = .6f;
             canvasGroup.blocksRaycasts = false;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            //Debug.Log("OnDrag");
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            //Debug.Log("OnEndDrag");
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
+            if (IsOverChoiceSlot)
+            {
+                IsOverChoiceSlot = false;
+                return;
+            }
+            ChoicePiece piece = eventData.pointerDrag.GetComponent<ChoicePiece>();
+            SceneController.ResetImagePosition(piece);
         }
     }
 }

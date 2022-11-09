@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,41 +6,53 @@ namespace LearningByPlaying
 {
     public class ChoiceSlot : MonoBehaviour, IDropHandler
     {
-        public static event Action OnFail;
-        public static event Action OnSuccess;
+        public static event Action OnChoiceFail;
+        public static event Action<ChoicePiece> OnChoiceFailChoicePiece;
+        public static event Action<ChoicePiece> OnChoiceSuccess;
+
+        PointerEventData currentEventData;
 
         public void OnDrop(PointerEventData eventData)
         {
+            DragDrop.IsOverChoiceSlot = true;
             if (eventData.pointerDrag != null)
             {
-                AlignGameObject(eventData);
+                CheckProgress(eventData);                
             }
         }
 
-        private void AlignGameObject(PointerEventData eventData)
+        private void AlignGameObject()
         {
-            Debug.Log(eventData.pointerDrag.name);
-            eventData.pointerDrag.GetComponent<Transform>().parent = GetComponent<Transform>().parent;
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            currentEventData.pointerDrag.GetComponent<Transform>().parent = GetComponent<Transform>().parent;
+            currentEventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
         }
 
-        private void Fail()
+        private void Fail(ChoicePiece choicePiece)
         {
-            OnFail?.Invoke();
+            Debug.Log("falhou...");
+            OnChoiceFailChoicePiece?.Invoke(choicePiece);
+            OnChoiceFail?.Invoke();
         }
 
-        private void Success()
+        private void Success(ChoicePiece choicePiece)
         {
-            OnSuccess?.Invoke();
+            Debug.Log("Acertou...");
+            AlignGameObject();
+            OnChoiceSuccess?.Invoke(choicePiece);
         }
 
         private bool CheckProgress(PointerEventData eventData)
         {
-            //TODO: PEGAR CRIAR UMA CLASSE QUE TENHA STATUS DO ITEM A SER ESCOLHIDO
-            //eventData.pointerDrag.GetComponent<Transform>().parent = GetComponent<Transform>().parent;
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-
-            return true;
+            ChoicePiece choicePiece = eventData.pointerDrag.GetComponent<ChoicePiece>();
+            if(choicePiece.nameId == SceneController.Piece.nameId)
+            {
+                currentEventData = eventData;
+                Success(choicePiece);
+                return true;
+            }
+            
+            Fail(choicePiece);
+            return false;
         }
     }
 }

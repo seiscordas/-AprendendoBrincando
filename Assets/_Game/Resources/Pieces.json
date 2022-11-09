@@ -1,31 +1,37 @@
 {
 	"pieces": [
 		{
+			"nameId": "abelha",
 			"theme": "Animals",
 			"image": "abelha",
 			"sound": "abelha.mp3"
 		},
 		{
+			"nameId": "cachorro",
 			"theme": "Animals",
 			"image": "image-2",
 			"sound": "sound-2"
 		},
 		{
+			"nameId": "cat",
 			"theme": "Animals",
 			"image": "image-3",
 			"sound": "sound-3"
 		},
 		{
+			"nameId": "cavalo",
 			"theme": "Animals",
 			"image": "image-4",
 			"sound": "sound-4"
 		},
 		{
+			"nameId": "coruja",
 			"theme": "Animals",
 			"image": "image-5",
 			"sound": "sound-5"
 		},
 		{
+			"nameId": "galo",
 			"theme": "Animals",
 			"image": "image-6",
 			"sound": "sound-6"

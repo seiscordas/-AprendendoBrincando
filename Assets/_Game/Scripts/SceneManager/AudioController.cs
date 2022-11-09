@@ -4,26 +4,12 @@ using UnityEngine.Networking;
 
 public class AudioController : MonoBehaviour
 {
-    public string audioName = "abelha.mp3";
-
     [Header("Audio Stuff")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip audioClip;
     [SerializeField] private string soundPath;
 
-    [SerializeField] private AudioClip teste;
-    public string testeName = "abelha";
-    private void Awake()
-    {
-        teste = Resources.Load<AudioClip>(testeName);
-
-        audioSource = gameObject.AddComponent<AudioSource>();
-        soundPath = Application.dataPath + "/_Game/Resources/Sounds/Animals/abelha.mp3";
-
-        //StartCoroutine(LoadAudio());
-    }
-
-    private IEnumerator LoadAudio()
+    private IEnumerator LoadAudio(string soundPath)
     {
         if (System.IO.File.Exists(soundPath))
         {
@@ -33,7 +19,7 @@ public class AudioController : MonoBehaviour
 
                 yield return audio.SendWebRequest();
 
-                if(audio.result == UnityWebRequest.Result.ConnectionError || audio.result == UnityWebRequest.Result.ProtocolError)
+                if (audio.result == UnityWebRequest.Result.ConnectionError || audio.result == UnityWebRequest.Result.ProtocolError)
                 {
                     Debug.Log(audio.error);
                     yield break;
@@ -58,25 +44,24 @@ public class AudioController : MonoBehaviour
                 {
                     Debug.Log("The download process is not completely finished.");
                 }
-            }            
+            }
         }
         else
         {
             Debug.Log("Unable to locate converted song file.");
+            print(soundPath);
         }
+    }
+
+    public void StartLoadAudio(string soundPath)
+    {
+        StartCoroutine(LoadAudio(soundPath));
     }
 
     private void PlayAudioFile()
     {
         audioSource.clip = audioClip;
         audioSource.Play();
-        audioSource.loop = true;
+        audioSource.loop = false;
     }
-
-    //private UnityWebRequest GetAudioFromFile(string path, string filename)
-    //{
-    //    string audioToLoad = string.Format(path + "{0}", filename);
-    //    UnityWebRequest request = UnityWebRequestMultimedia. (audioToLoad);
-    //    return request;
-    //}
 }
