@@ -1,67 +1,41 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class AudioController : MonoBehaviour
+namespace LearningByPlaying
 {
-    [Header("Audio Stuff")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip audioClip;
-    [SerializeField] private string soundPath;
-
-    private IEnumerator LoadAudio(string soundPath)
+    public class AudioController : MonoBehaviour
     {
-        if (System.IO.File.Exists(soundPath))
-        {
-            using (var audio = UnityWebRequestMultimedia.GetAudioClip(soundPath, AudioType.MPEG))
-            {
-                ((DownloadHandlerAudioClip)audio.downloadHandler).streamAudio = true;
+        [Header("Audio Config")]
+        [SerializeField] private string audioPath;
+        [SerializeField] private AudioClip audioSucess;
+        [SerializeField] private AudioClip audioFail;
 
-                yield return audio.SendWebRequest();
+        public AudioSource AudioSource;
 
-                if (audio.result == UnityWebRequest.Result.ConnectionError || audio.result == UnityWebRequest.Result.ProtocolError)
-                {
-                    Debug.Log(audio.error);
-                    yield break;
-                }
-                DownloadHandlerAudioClip dlHandler = (DownloadHandlerAudioClip)audio.downloadHandler;
-                if (dlHandler.isDone)
-                {
-                    AudioClip audioClip = dlHandler.audioClip;
+        public static AudioController Instance;
 
-                    if (audioClip != null)
-                    {
-                        this.audioClip = DownloadHandlerAudioClip.GetContent(audio);
-                        PlayAudioFile();
-                        Debug.Log("Playing song using Audio Source!");
-                    }
-                    else
-                    {
-                        Debug.Log("Couldn't find a valid AudioClip :(");
-                    }
-                }
-                else
-                {
-                    Debug.Log("The download process is not completely finished.");
-                }
-            }
+        private void Awake()
+        {            
+            Instance = this;
         }
-        else
+
+        public AudioClip LoadAudio(string audioTheme, string audioName)
         {
-            Debug.Log("Unable to locate converted song file.");
-            print(soundPath);
+            return Resources.Load<AudioClip>(audioPath + audioTheme + "/" + audioName);
         }
-    }
 
-    public void StartLoadAudio(string soundPath)
-    {
-        StartCoroutine(LoadAudio(soundPath));
-    }
+        public void PlaySoundPiece()
+        {
+            AudioSource.Play();
+        }
 
-    private void PlayAudioFile()
-    {
-        audioSource.clip = audioClip;
-        audioSource.Play();
-        audioSource.loop = false;
+        public void PlaySoundSucess()
+        {
+            AudioSource.PlayOneShot(audioSucess);
+        }
+
+        public void PlaySoundFail()
+        {
+            AudioSource.PlayOneShot(audioFail);
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace LearningByPlaying
                 return;
             }
             ChoicePiece piece = eventData.pointerDrag.GetComponent<ChoicePiece>();
-            SceneController.ResetImagePosition(piece);
+            ImageController.Instance.ResetImagePiecePosition(piece);
         }
     }
 }

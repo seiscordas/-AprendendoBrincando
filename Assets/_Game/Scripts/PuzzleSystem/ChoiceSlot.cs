@@ -7,8 +7,9 @@ namespace LearningByPlaying
     public class ChoiceSlot : MonoBehaviour, IDropHandler
     {
         public static event Action OnChoiceFail;
+        public static event Action OnChoiceSuccess;
         public static event Action<ChoicePiece> OnChoiceFailChoicePiece;
-        public static event Action<ChoicePiece> OnChoiceSuccess;
+        public static event Action<ChoicePiece> OnChoiceSuccessChoicePiece;
 
         PointerEventData currentEventData;
 
@@ -23,8 +24,7 @@ namespace LearningByPlaying
 
         private void AlignGameObject()
         {
-            currentEventData.pointerDrag.GetComponent<Transform>().parent = GetComponent<Transform>().parent;
-            currentEventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            currentEventData.pointerDrag.GetComponent<RectTransform>().transform.position = GetComponent<RectTransform>().transform.position;
         }
 
         private void Fail(ChoicePiece choicePiece)
@@ -38,13 +38,14 @@ namespace LearningByPlaying
         {
             Debug.Log("Acertou...");
             AlignGameObject();
-            OnChoiceSuccess?.Invoke(choicePiece);
+            OnChoiceSuccessChoicePiece?.Invoke(choicePiece);
+            OnChoiceSuccess?.Invoke();
         }
 
         private bool CheckProgress(PointerEventData eventData)
         {
             ChoicePiece choicePiece = eventData.pointerDrag.GetComponent<ChoicePiece>();
-            if(choicePiece.nameId == SceneController.Piece.nameId)
+            if(SceneController.PieceCompare(choicePiece))
             {
                 currentEventData = eventData;
                 Success(choicePiece);

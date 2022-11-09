@@ -1,12 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ImageController : MonoBehaviour
+namespace LearningByPlaying
 {
-    [Header("Image Stuff")]
-    [SerializeField] private string imagePath;
-
-    public Sprite LoadImage(string imgTheme, string imgName)
+    public class ImageController : MonoBehaviour
     {
-        return Resources.Load<Sprite>(imagePath + imgTheme + "/" + imgName);
+        [Header("Image Config")]
+        [SerializeField] private string imagePath;
+
+        SceneController sceneController;
+
+        public static ImageController Instance;
+
+        private void Awake()
+        {
+            sceneController = GetComponent<SceneController>();
+            Instance = this;
+        }
+
+        public Sprite LoadImage(string imgTheme, string imgName)
+        {
+            return Resources.Load<Sprite>(imagePath + imgTheme + "/" + imgName);
+        }
+
+        public void SetImagePieces(List<Piece> piecesList)
+        {
+            ChoicePiece[] choicesPlaceList = sceneController.ChoicesPlace.GetComponentsInChildren<ChoicePiece>();
+            int index = 0;
+            foreach (ChoicePiece choicePiece in choicesPlaceList)
+            {
+                choicePiece.GetComponent<Image>().sprite = LoadImage(piecesList[index].theme, piecesList[index].nameId);
+                choicePiece.GetComponent<ChoicePiece>().nameId = piecesList[index].nameId;
+                choicePiece.transform.localPosition = Vector3.zero;
+                index++;
+            }
+        }
+
+        public void ResetImagePiecePosition(ChoicePiece choicePiece)
+        {
+            choicePiece.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
     }
 }

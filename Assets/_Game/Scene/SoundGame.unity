@@ -281,7 +281,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195490161}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -289,8 +289,8 @@ RectTransform:
   - {fileID: 1722670893}
   - {fileID: 951035444}
   - {fileID: 252194738}
-  m_Father: {fileID: 2014411933}
-  m_RootOrder: 0
+  m_Father: {fileID: 439024195}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -308,6 +308,8 @@ GameObject:
   - component: {fileID: 198755446}
   - component: {fileID: 198755447}
   - component: {fileID: 198755448}
+  - component: {fileID: 198755449}
+  - component: {fileID: 198755450}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -345,8 +347,6 @@ MonoBehaviour:
   jsonScene: {fileID: 4900000, guid: 6ffa6f58db9ed6f4880366a39194a85d, type: 3}
   choicesPlace: {fileID: 1584239120}
   piecesSet: []
-  audioPath: Sounds/
-  imagePath: Images/
 --- !u!114 &198755448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +362,34 @@ MonoBehaviour:
   shakeMagnitude: 0.05
   shakeTime: 0.5
   elementToShake: {fileID: 439024194}
+--- !u!114 &198755449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198755445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8db28e779ef1648840afa0fb5dbc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imagePath: Images/
+--- !u!114 &198755450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198755445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9526c3409863cb445b36aa9daeaeb3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPath: Sounds/
+  audioSucess: {fileID: 8300000, guid: 431760de01df77749b31d387b45d03c2, type: 3}
+  audioFail: {fileID: 8300000, guid: 7246646a61e840f4fb2b58784ab37cb5, type: 3}
 --- !u!1 &252194737
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,10 +765,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 844820697}
+  - {fileID: 195490162}
   - {fileID: 1648016971}
   - {fileID: 1584239120}
   m_Father: {fileID: 2014411933}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1650,7 +1679,7 @@ RectTransform:
   - {fileID: 1614663410}
   - {fileID: 2137169701}
   m_Father: {fileID: 439024195}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1767,7 +1796,7 @@ RectTransform:
   m_Children:
   - {fileID: 889662703}
   m_Father: {fileID: 439024195}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2089,7 +2118,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 195490162}
   - {fileID: 439024195}
   m_Father: {fileID: 0}
   m_RootOrder: 1
