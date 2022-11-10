@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Game/Scene/MainMenu.unity
+    guid: 778c0a34dcdfcc64487c1aaec4f00ea2
+  - enabled: 1
+    path: Assets/_Game/Scene/GameSoundMenu.unity
+    guid: eceb37627a729e6408491601a31c8c41
+  - enabled: 1
+    path: Assets/_Game/Scene/SoundGame.unity
+    guid: 844710491183be440bbb66fc7d901e55
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 6bfba195d359fd6449f987597ce14fc1, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 57250ebd42cb4a34da2f0377f0df50d7, type: 2}

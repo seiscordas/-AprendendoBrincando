@@ -7,21 +7,38 @@ namespace LearningByPlaying
 {
     public class SceneController : MonoBehaviour
     {
+        public static SceneController Instance;
+
+        private AudioSource audioSource;
+        public static Piece PieceToChoose { get; private set; }
+        public Transform ChoicesPlace { get => choicesPlace; }
+
         [Header("General Settings")]
         [SerializeField] private TextAsset jsonScene;
         [SerializeField] private Transform choicesPlace;
+        [SerializeField] private GameObject SucessScreen;
         [SerializeField] private List<Piece> piecesSet;
-        
-        private AudioSource audioSource;
 
-        public static Piece PieceToChoose { get; private set; }
-        public Transform ChoicesPlace { get => choicesPlace; }
+        private void Awake()
+        {
+            GameType.SetGameType("audio");
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
 
         private void Start()
         {
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
             StartGame();
+            StartListening();
         }
 
         private void StartGame()
@@ -37,22 +54,27 @@ namespace LearningByPlaying
         public void RestartGame()
         {
             StartGame();
+            SucessScreen.SetActive(false);
         }
 
-        private void OnEnable()
+        private void StartListening()
         {
-            ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
             ChoiceSlot.OnChoiceFail += ScreenShaker.Instance.ShakeIt;
-            ChoiceSlot.OnChoiceSuccess += AudioController.Instance.PlaySoundSucess;
             ChoiceSlot.OnChoiceFail += AudioController.Instance.PlaySoundFail;
+            ChoiceSlot.OnChoiceSuccess += ToggleShowSucessScreen;
+            ChoiceSlot.OnChoiceSuccess += ScoreManager.Instance.AddPoint;
+            ChoiceSlot.OnChoiceSuccess += AudioController.Instance.PlaySoundSucess;
+            ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
         }
 
         private void OnDisable()
         {
-            ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
             ChoiceSlot.OnChoiceFail -= ScreenShaker.Instance.ShakeIt;
-            ChoiceSlot.OnChoiceSuccess -= AudioController.Instance.PlaySoundSucess;
             ChoiceSlot.OnChoiceFail -= AudioController.Instance.PlaySoundFail;
+            ChoiceSlot.OnChoiceSuccess -= ToggleShowSucessScreen;
+            ChoiceSlot.OnChoiceSuccess -= ScoreManager.Instance.AddPoint;
+            ChoiceSlot.OnChoiceSuccess -= AudioController.Instance.PlaySoundSucess;
+            ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
         }
 
         private PiecesList GetJSONFile()
@@ -93,15 +115,16 @@ namespace LearningByPlaying
                 return true;
             return false;
         }
+
+        private void ToggleShowSucessScreen()
+        {
+            SucessScreen.SetActive(!SucessScreen.activeSelf);
+        }
     }
-    enum GameType { audio, read }
-    enum GameTheme { animals, objects }
+    //enum GameType { audio, read }
+    //enum GameTheme { animals, objects }
 }
 //TODO:
-//Add som de erro quando falha
-//Add som de sucesso quando acerta
-//Acrecentar acertos no Score
-//Add tela de sucesso com os botões de menu proximo
 //
 //sistema de troca de background aleatorio e de acordo como o tema
 //sistema de troca de background das peças aleatorio
