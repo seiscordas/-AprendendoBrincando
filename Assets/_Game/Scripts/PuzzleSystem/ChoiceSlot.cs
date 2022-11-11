@@ -45,7 +45,7 @@ namespace LearningByPlaying
         private bool CheckProgress(PointerEventData eventData)
         {
             ChoicePiece choicePiece = eventData.pointerDrag.GetComponent<ChoicePiece>();
-            if(SceneController.PieceCompare(choicePiece))
+            if(SoundGameController.PieceCompare(choicePiece))
             {
                 currentEventData = eventData;
                 Success(choicePiece);

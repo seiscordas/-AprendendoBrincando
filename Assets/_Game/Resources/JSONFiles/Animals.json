@@ -1,0 +1,61 @@
+{
+	"pieces": [
+		{
+			"nameId": "bee"
+		},
+		{
+			"nameId": "dog"
+		},
+		{
+			"nameId": "cat"
+		},
+		{
+			"nameId": "horse"
+		},
+		{
+			"nameId": "owl"
+		},
+		{
+			"nameId": "snake"
+		},
+		{
+			"nameId": "crow"
+		},
+		{
+			"nameId": "cow"
+		},
+		{
+			"nameId": "elephant"
+		},
+		{
+			"nameId": "frog"
+		},
+		{
+			"nameId": "giraffe"
+		},
+		{
+			"nameId": "lion"
+		},
+		{
+			"nameId": "monkey"
+		},
+		{
+			"nameId": "pig"
+		},
+		{
+			"nameId": "dove"
+		},
+		{
+			"nameId": "rat"
+		},
+		{
+			"nameId": "sheep"
+		},
+		{
+			"nameId": "wolf"
+		},
+		{
+			"nameId": "rooster"
+		}	
+	]
+}

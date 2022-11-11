@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 14567514}
   - component: {fileID: 14567513}
   m_Layer: 0
-  m_Name: LoadSceneGameType
+  m_Name: LoadSceneForButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 1432604975}
   - component: {fileID: 1432604974}
   m_Layer: 5
-  m_Name: ButtonGameSound
+  m_Name: ButtonSoundGameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: GameSoundMenu
+          m_StringArgument: SoundGameMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1432604975
@@ -909,7 +909,7 @@ GameObject:
   - component: {fileID: 2045912853}
   - component: {fileID: 2045912852}
   m_Layer: 5
-  m_Name: ButtonGameRead
+  m_Name: ButtonReadGameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

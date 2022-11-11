@@ -9,13 +9,13 @@ namespace LearningByPlaying
         [Header("Image Config")]
         [SerializeField] private string imagePath;
 
-        SceneController sceneController;
+        SoundGameController sceneController;
 
         public static ImageController Instance;
 
         private void Awake()
         {
-            sceneController = GetComponent<SceneController>();
+            sceneController = GetComponent<SoundGameController>();
             Instance = this;
         }
 
@@ -30,7 +30,7 @@ namespace LearningByPlaying
             int index = 0;
             foreach (ChoicePiece choicePiece in choicesPlaceList)
             {
-                choicePiece.GetComponent<Image>().sprite = LoadImage(piecesList[index].theme, piecesList[index].nameId);
+                choicePiece.GetComponent<Image>().sprite = LoadImage(CurrentGameTheme.GetGameTheme(), piecesList[index].nameId);
                 choicePiece.GetComponent<ChoicePiece>().nameId = piecesList[index].nameId;
                 choicePiece.transform.localPosition = Vector3.zero;
                 index++;

@@ -3,77 +3,81 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsDataBase : MonoBehaviour
+namespace LearningByPlaying
 {
-    public static PlayerPrefsDataBase Instance;
-
-    public const string CONST_POINTS = "AB_POINTS";
-    public const string CONST_TUTORIAL = "AB_TUTORIAL";
-    public const string CURRENT_HISTORY = "CurrentHistory";
-    public static string CONST_TUTORIAL1 => CONST_TUTORIAL;
-
-    [SerializeField] private int points;
-
-    public int Points { get => points; }
-
-    private void Awake()
+    public class PlayerPrefsDataBase : MonoBehaviour
     {
-        if (Instance == null)
+        public static PlayerPrefsDataBase Instance;
+
+        public const string CONST_POINTS = "AB_POINTS";
+        public const string CONST_TUTORIAL = "AB_TUTORIAL";
+        public const string CURRENT_HISTORY = "CurrentHistory";
+        public const string CURRENT_THEME = "CurrentTheme";
+        public static string CONST_TUTORIAL1 => CONST_TUTORIAL;
+
+        [SerializeField] private int points;
+
+        public int Points { get => points; }
+
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
-        else if (Instance != this)
+        private void Start()
         {
-            Destroy(gameObject);
+            points = ReadIntInfo(CONST_POINTS);
         }
-    }
-    private void Start()
-    {
-        points = ReadIntInfo(CONST_POINTS);
-    }
 
-    public int ReadIntInfo(string key)
-    {
-        if (PlayerPrefs.HasKey(key))
+        public int ReadIntInfo(string key)
         {
-            return PlayerPrefs.GetInt(key);
+            if (PlayerPrefs.HasKey(key))
+            {
+                return PlayerPrefs.GetInt(key);
+            }
+            else
+            {
+                return 0;
+            }
         }
-        else
+
+        public string ReadStringInfo(string key)
         {
-            return 0;
+            if (PlayerPrefs.HasKey(key))
+            {
+                //Debug.Log(key+": "+ PlayerPrefs.GetString(key));
+                return PlayerPrefs.GetString(key);
+            }
+            else
+            {
+                return null;
+            }
         }
-    }
 
-    public string ReadStringInfo(string key)
-    {
-        if (PlayerPrefs.HasKey(key))
+        public void SaveIntInfo(string key, int valor)
         {
-            //Debug.Log(key+": "+ PlayerPrefs.GetString(key));
-            return PlayerPrefs.GetString(key);
+            PlayerPrefs.SetInt(key, valor);
         }
-        else
+
+        public void SaveStringInfo(string key, string valor)
         {
-            return null;
+            //Debug.Log(key+" : "+ valor);
+            PlayerPrefs.SetString(key, valor);
         }
-    }
 
-    public void SaveIntInfo(string key, int valor)
-    {
-        PlayerPrefs.SetInt(key, valor);
-    }
-
-    public void SaveStringInfo(string key, string valor)
-    {
-        //Debug.Log(key+" : "+ valor);
-        PlayerPrefs.SetString(key, valor);
-    }
-
-    internal void SavePoints()
-    {
-        points++;
-        //Debug.Log("Gravando Pontos : "+ intPontos);
-        SaveIntInfo(CONST_POINTS, points);
+        internal void SavePoints()
+        {
+            points++;
+            //Debug.Log("Gravando Pontos : "+ intPontos);
+            SaveIntInfo(CONST_POINTS, points);
+        }
     }
 }
 

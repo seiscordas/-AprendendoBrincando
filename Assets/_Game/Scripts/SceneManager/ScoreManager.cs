@@ -19,7 +19,7 @@ namespace LearningByPlaying
 
         private void Start()
         {
-            highscore = PlayerPrefsDataBase.Instance.ReadIntInfo(GameType.GetGameType());
+            highscore = PlayerPrefsDataBase.Instance.ReadIntInfo(CurrentGameTheme.GetGameTheme());
             score = highscore;
             scoreText.text = score.ToString();
         }
@@ -29,7 +29,7 @@ namespace LearningByPlaying
             score++;
             scoreText.text = score.ToString();
             if (score > highscore)
-                PlayerPrefsDataBase.Instance.SaveIntInfo(GameType.GetGameType(), score);
+                PlayerPrefsDataBase.Instance.SaveIntInfo(CurrentGameTheme.GetGameTheme(), score);
             //PlayerPrefs.SetInt(nameof(highscore), score);
         }
     }

@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/_Game/Scene/MainMenu.unity
     guid: 778c0a34dcdfcc64487c1aaec4f00ea2
   - enabled: 1
-    path: Assets/_Game/Scene/GameSoundMenu.unity
+    path: Assets/_Game/Scene/SoundGameMenu.unity
     guid: eceb37627a729e6408491601a31c8c41
   - enabled: 1
     path: Assets/_Game/Scene/SoundGame.unity
