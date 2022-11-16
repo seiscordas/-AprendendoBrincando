@@ -33,6 +33,7 @@ namespace LearningByPlaying
         {
             button = GetComponent<Button>();
             button.onClick.AddListener(() => SetGameTheme(gameTheme.ToString()));
+            button.onClick.AddListener(() => SetGameType(gameType.ToString()));
             button.onClick.AddListener(() => LoadScene(sceneName));
         }
 
@@ -67,7 +68,7 @@ namespace LearningByPlaying
 
         private void SetGameType(string gameType)
         {
-            CurrentGameTheme.SetGameTheme(gameType);
+            CurrentGameType.SetGameType(gameType);
         }
 
         public void OnAfterDeserialize() { }

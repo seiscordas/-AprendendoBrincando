@@ -29,14 +29,12 @@ namespace LearningByPlaying
 
         private void Fail(ChoicePiece choicePiece)
         {
-            Debug.Log("falhou...");
             OnChoiceFailChoicePiece?.Invoke(choicePiece);
             OnChoiceFail?.Invoke();
         }
 
         private void Success(ChoicePiece choicePiece)
         {
-            Debug.Log("Acertou...");
             AlignGameObject();
             OnChoiceSuccessChoicePiece?.Invoke(choicePiece);
             OnChoiceSuccess?.Invoke();

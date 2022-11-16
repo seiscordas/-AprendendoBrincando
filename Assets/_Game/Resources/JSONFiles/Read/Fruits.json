@@ -1,0 +1,28 @@
+{
+	"pieces": [
+		{
+			"nameId": "yellow"
+		},
+		{
+			"nameId": "blue"
+		},
+		{
+			"nameId": "white"
+		},
+		{
+			"nameId": "orange"
+		},
+		{
+			"nameId": "pink"
+		},
+		{
+			"nameId": "purple"
+		},
+		{
+			"nameId": "red"
+		},
+		{
+			"nameId": "black"
+		}	
+	]
+}

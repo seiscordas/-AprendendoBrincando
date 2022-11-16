@@ -1,7 +1,9 @@
 using LearningByPlaying.gameTheme;
+using LearningByPlaying.GameType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace LearningByPlaying
@@ -15,8 +17,8 @@ namespace LearningByPlaying
         public Transform ChoicesPlace { get => choicesPlace; }
 
         [Header("General Settings")]
-        [SerializeField] private TextAsset jsonScene;
         [SerializeField] private string jsonPath;
+        [SerializeField] private TextMeshProUGUI WordsPlace;
         [SerializeField] private Transform choicesPlace;
         [SerializeField] private GameObject SucessScreen;
         [SerializeField] private List<Piece> piecesSet;
@@ -26,7 +28,7 @@ namespace LearningByPlaying
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -36,7 +38,10 @@ namespace LearningByPlaying
 
         private void Start()
         {
+            //if (CurrentGameTheme.GetGameTheme() == null)
+            //    CurrentGameTheme.SetGameTheme("read");
             print("Game Theme: " + CurrentGameTheme.GetGameTheme());
+            print("Game Type: " + CurrentGameType.GetGameType());
 
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
@@ -50,7 +55,7 @@ namespace LearningByPlaying
             ImageController.Instance.SetImagePieces(piecesSet);
 
             PieceToChoose = piecesSet[UnityEngine.Random.Range(0, piecesSet.Count)];
-            audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameTheme.GetGameTheme(), PieceToChoose.nameId);
+            audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameType.GetGameType(), CurrentGameTheme.GetGameTheme(), PieceToChoose.nameId);
             AudioController.Instance.PlaySoundPiece();
         }
 
@@ -82,8 +87,7 @@ namespace LearningByPlaying
 
         private PiecesList GetJSONFile()
         {
-            var jsonFile = Resources.Load(jsonPath + CurrentGameTheme.GetGameTheme()).ToString();
-            //return JsonUtility.FromJson<PiecesList>(jsonScene.ToString());
+            var jsonFile = Resources.Load(jsonPath + CurrentGameType.GetGameType().ToString() + "/" + CurrentGameTheme.GetGameTheme()).ToString();
             return JsonUtility.FromJson<PiecesList>(jsonFile);
         }
 
@@ -129,8 +133,8 @@ namespace LearningByPlaying
     //enum GameTheme { animals, objects }
 }
 //Duvidas
-//Deixar informações em um só arquivo JSON ou cada tema ter seu proprio arquvo JSON
-//Colocar script nos botoes com nome da sena e tema ao em vez de arrastar gameobject
+//
+//
 //
 //
 //TODO:

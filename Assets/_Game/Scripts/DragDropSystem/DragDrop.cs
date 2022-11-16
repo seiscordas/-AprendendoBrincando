@@ -18,10 +18,7 @@ namespace LearningByPlaying
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            //Debug.Log("OnPointerDown");
-        }
+        public void OnPointerDown(PointerEventData eventData) { }
 
         public void OnBeginDrag(PointerEventData eventData)
         {

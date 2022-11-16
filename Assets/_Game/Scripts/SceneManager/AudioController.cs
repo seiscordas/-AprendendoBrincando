@@ -5,7 +5,6 @@ namespace LearningByPlaying
     public class AudioController : MonoBehaviour
     {
         [Header("Audio Config")]
-        [SerializeField] private string audioPath;
         [SerializeField] private AudioClip audioSucess;
         [SerializeField] private AudioClip audioFail;
 
@@ -18,9 +17,9 @@ namespace LearningByPlaying
             Instance = this;
         }
 
-        public AudioClip LoadAudio(string audioTheme, string audioName)
+        public AudioClip LoadAudio(string gameType, string gameTheme, string audioName)
         {
-            return Resources.Load<AudioClip>(audioPath + audioTheme + "/" + audioName);
+            return Resources.Load<AudioClip>("Audios/" + gameType + "/" + gameTheme + "/" + audioName);
         }
 
         public void PlaySoundPiece()

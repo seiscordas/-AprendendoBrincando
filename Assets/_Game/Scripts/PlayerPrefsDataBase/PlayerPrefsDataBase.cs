@@ -52,7 +52,6 @@ namespace LearningByPlaying
         {
             if (PlayerPrefs.HasKey(key))
             {
-                //Debug.Log(key+": "+ PlayerPrefs.GetString(key));
                 return PlayerPrefs.GetString(key);
             }
             else
@@ -68,14 +67,12 @@ namespace LearningByPlaying
 
         public void SaveStringInfo(string key, string valor)
         {
-            //Debug.Log(key+" : "+ valor);
             PlayerPrefs.SetString(key, valor);
         }
 
         internal void SavePoints()
         {
             points++;
-            //Debug.Log("Gravando Pontos : "+ intPontos);
             SaveIntInfo(CONST_POINTS, points);
         }
     }

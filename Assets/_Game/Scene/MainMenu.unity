@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 1432604977}
   - component: {fileID: 1432604978}
   m_Layer: 5
-  m_Name: ButtonSoundGameMenu
+  m_Name: ButtonListenGameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: SoundGameMenu
+  sceneName: ListenGameMenu
   gameTheme: 0
   gameType: 0
 --- !u!1 &1584239119
@@ -1020,6 +1020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  sceneName: ReadGameMenu
   gameTheme: 0
   gameType: 0
