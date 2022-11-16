@@ -199,50 +199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8901495}
   m_CullTransparentMesh: 1
---- !u!1 &14567512
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 14567514}
-  - component: {fileID: 14567513}
-  m_Layer: 0
-  m_Name: LoadSceneForButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &14567513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14567512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &14567514
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14567512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47246164, y: -0.38430315, z: 0.043137804}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &439024194
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +516,8 @@ GameObject:
   - component: {fileID: 1432604976}
   - component: {fileID: 1432604975}
   - component: {fileID: 1432604974}
+  - component: {fileID: 1432604977}
+  - component: {fileID: 1432604978}
   m_Layer: 5
   m_Name: ButtonSoundGameMenu
   m_TagString: Untagged
@@ -606,7 +564,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -630,19 +588,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1432604975}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 14567513}
-        m_TargetAssemblyTypeName: LoadSceneByGameType, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SoundGameMenu
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1432604975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,6 +627,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432604972}
   m_CullTransparentMesh: 1
+--- !u!114 &1432604977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432604972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab26d54aeef08e54c9723bf3464ebf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endValue: 1.5
+  duration: 1
+--- !u!114 &1432604978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432604972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: SoundGameMenu
+  gameTheme: 0
+  gameType: 0
 --- !u!1 &1584239119
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +883,8 @@ GameObject:
   - component: {fileID: 2045912854}
   - component: {fileID: 2045912853}
   - component: {fileID: 2045912852}
+  - component: {fileID: 2045912855}
+  - component: {fileID: 2045912856}
   m_Layer: 5
   m_Name: ButtonReadGameMenu
   m_TagString: Untagged
@@ -954,7 +931,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1017,3 +994,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045912850}
   m_CullTransparentMesh: 1
+--- !u!114 &2045912855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045912850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab26d54aeef08e54c9723bf3464ebf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endValue: 1.5
+  duration: 1
+--- !u!114 &2045912856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045912850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: MainMenu
+  gameTheme: 0
+  gameType: 0

@@ -1,12 +1,15 @@
-public class CurrentGameTheme
+namespace LearningByPlaying.gameTheme
 {
-    static string gameTheme;
-    public static string GetGameTheme()
+    public class CurrentGameTheme
     {
-        return gameTheme;
-    }
-    public static void SetGameTheme(string value)
-    {
-        gameTheme = value;
+        static string gameTheme;
+        public static string GetGameTheme()
+        {
+            return gameTheme;
+        }
+        public static void SetGameTheme(string value)
+        {
+            gameTheme = value;
+        }
     }
 }

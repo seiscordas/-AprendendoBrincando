@@ -199,17 +199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8901495}
   m_CullTransparentMesh: 1
---- !u!114 &14567513 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3647541551415648807, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-  m_PrefabInstance: {fileID: 3647541551409998462}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &366708583
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +855,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -890,31 +879,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1071772312}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 14567513}
-        m_TargetAssemblyTypeName: LoadSceneByGameType, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SoundGame
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 14567513}
-        m_TargetAssemblyTypeName: LearningByPlaying.LoadSceneHelper, Assembly-CSharp
-        m_MethodName: SetGameTheme
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Colors
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1071772312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,26 +918,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071772309}
   m_CullTransparentMesh: 1
---- !u!95 &1071772314
-Animator:
-  serializedVersion: 4
+--- !u!114 &1071772314
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071772309}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a372fa6d617e25498c6d19f1a8323df, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: SoundGame
+  gameTheme: 2
+  gameType: 0
 --- !u!1 &1305436800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1011,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1432604973}
   - component: {fileID: 1432604976}
-  - component: {fileID: 1432604975}
   - component: {fileID: 1432604974}
   - component: {fileID: 1432604977}
   m_Layer: 5
@@ -1102,7 +1061,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1123,64 +1082,10 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1432604975}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 14567513}
-        m_TargetAssemblyTypeName: LoadSceneByGameType, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SoundGame
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 14567513}
-        m_TargetAssemblyTypeName: LearningByPlaying.LoadSceneByName, Assembly-CSharp
-        m_MethodName: SetGameTheme
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Animals
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1432604975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432604972}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1a77b93c3f5480641bef3347a29cda5f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1432604976
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1189,26 +1094,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432604972}
   m_CullTransparentMesh: 1
---- !u!95 &1432604977
-Animator:
-  serializedVersion: 4
+--- !u!114 &1432604977
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432604972}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a372fa6d617e25498c6d19f1a8323df, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd7716ed4aa1744498e74bb8686cfa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: SoundGame
+  gameTheme: 1
+  gameType: 0
 --- !u!1 &1541293139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,60 +1750,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111894134}
   m_CullTransparentMesh: 1
---- !u!1001 &3647541551409998462
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.47246164
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.38430315
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.043137804
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648804, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647541551415648806, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}
-      propertyPath: m_Name
-      value: LoadSceneHelperForButton
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0fb4e9238d406b44fa6e4cdbcf2def60, type: 3}

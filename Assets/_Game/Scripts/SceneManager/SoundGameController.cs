@@ -1,3 +1,4 @@
+using LearningByPlaying.gameTheme;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace LearningByPlaying
         private void Start()
         {
             print("Game Theme: " + CurrentGameTheme.GetGameTheme());
+
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
             StartGame();
