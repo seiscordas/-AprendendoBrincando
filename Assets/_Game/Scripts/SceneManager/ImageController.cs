@@ -22,7 +22,7 @@ namespace LearningByPlaying
 
         public Sprite LoadImage(string imgTheme, string imgName)
         {
-            return Resources.Load<Sprite>(imagePath + "/" + imgTheme + "/" + imgName);
+            return Resources.Load<Sprite>(imagePath + imgTheme + "/" + imgName);
         }
 
         public void SetImagePieces(List<Piece> piecesList)
