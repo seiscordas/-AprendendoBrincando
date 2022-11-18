@@ -5,6 +5,7 @@ namespace LearningByPlaying.gameTheme
         none,
         Animals,
         Colors,
+        Fruits,
         Objects
     }
 }

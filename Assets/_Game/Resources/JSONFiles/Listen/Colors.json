@@ -22,6 +22,18 @@
 			"nameId": "red"
 		},
 		{
+			"nameId": "brown"
+		},
+		{
+			"nameId": "darkblue"
+		},
+		{
+			"nameId": "lightblue"
+		},
+		{
+			"nameId": "green"
+		},
+		{
 			"nameId": "black"
 		}	
 	]

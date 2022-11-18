@@ -1,9 +1,9 @@
 using LearningByPlaying.gameTheme;
 using LearningByPlaying.GameType;
+using LearningByPlaying.WordWriterSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 namespace LearningByPlaying
@@ -17,8 +17,7 @@ namespace LearningByPlaying
         public Transform ChoicesPlace { get => choicesPlace; }
 
         [Header("General Settings")]
-        [SerializeField] private string jsonPath;
-        [SerializeField] private TextMeshProUGUI WordsPlace;
+        [SerializeField] private string jsonPath;        
         [SerializeField] private Transform choicesPlace;
         [SerializeField] private GameObject SucessScreen;
         [SerializeField] private List<Piece> piecesSet;
@@ -34,14 +33,19 @@ namespace LearningByPlaying
             {
                 Destroy(gameObject);
             }
+
+            //somente para executar teste direto na cena.
+            if (CurrentGameTheme.GetGameTheme() == null)
+            {
+                CurrentGameTheme.SetGameTheme(GameThemes.Fruits.ToString());
+                CurrentGameType.SetGameType(GameTypes.Read.ToString());
+            }
         }
 
         private void Start()
         {
-            //if (CurrentGameTheme.GetGameTheme() == null)
-            //    CurrentGameTheme.SetGameTheme("read");
-            print("Game Theme: " + CurrentGameTheme.GetGameTheme());
-            print("Game Type: " + CurrentGameType.GetGameType());
+            print("Game Theme: " + CurrentGameTheme.GetGameTheme());//debug
+            print("Game Type: " + CurrentGameType.GetGameType());//debug
 
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
@@ -51,12 +55,17 @@ namespace LearningByPlaying
 
         private void StartGame()
         {
-            piecesSet = Shuffle(CreatePiecesSet(GetJSONFile()));
+            piecesSet = Shuffle(CreatePiecesSet(GetJSONFile()));//TODO: COLOCAR METODOS EM CADEIA CreatePiecesSet->Shuffle
             ImageController.Instance.SetImagePieces(piecesSet);
 
             PieceToChoose = piecesSet[UnityEngine.Random.Range(0, piecesSet.Count)];
             audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameType.GetGameType(), CurrentGameTheme.GetGameTheme(), PieceToChoose.nameId);
             AudioController.Instance.PlaySoundPiece();
+
+            if (CurrentGameType.GetGameType() == GameTypes.Read.ToString())
+            {
+                WordWriter.Instance.StartWordWriter(PieceToChoose.word);
+            }
         }
 
         public void RestartGame()
@@ -129,16 +138,15 @@ namespace LearningByPlaying
             SucessScreen.SetActive(!SucessScreen.activeSelf);
         }
     }
-    //enum GameType { audio, read }
-    //enum GameTheme { animals, objects }
 }
+
+//TODO:
+//Adicionar sistema de som em cada letra e ao cliclar falar o nome da letra
+//Trocar de ListToPopup (lista de cena) para Enum. Testar
+//sistema de troca de background da cena e das peças de forma aleatoria e de acordo como o tema (USAR PREFABS)
+//sistema de idioma
 //Duvidas
 //
 //
 //
 //
-//TODO:
-//
-//sistema de troca de background aleatorio e de acordo como o tema
-//sistema de troca de background das peças aleatorio
-//sistema de idioma

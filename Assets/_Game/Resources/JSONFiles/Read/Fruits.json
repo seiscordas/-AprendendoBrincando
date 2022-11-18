@@ -1,28 +1,36 @@
 {
 	"pieces": [
 		{
-			"nameId": "yellow"
+			"nameId": "Amora",
+			"word": "Amora"
 		},
 		{
-			"nameId": "blue"
+			"nameId": "Manga",
+			"word": "Manga"
 		},
 		{
-			"nameId": "white"
+			"nameId": "Ameixa",
+			"word": "Ameixa"
 		},
 		{
-			"nameId": "orange"
+			"nameId": "apple",
+			"word": "Maçã"
 		},
 		{
-			"nameId": "pink"
+			"nameId": "Banana",
+			"word": "Banana"
 		},
 		{
-			"nameId": "purple"
+			"nameId": "papaia",
+			"word": "Mamão"
 		},
 		{
-			"nameId": "red"
+			"nameId": "Caqui",
+			"word": "Caqui"
 		},
 		{
-			"nameId": "black"
+			"nameId": "Cereja",
+			"word": "Cereja"
 		}	
 	]
 }
