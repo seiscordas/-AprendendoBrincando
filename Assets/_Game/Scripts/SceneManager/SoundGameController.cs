@@ -141,12 +141,27 @@ namespace LearningByPlaying
 }
 
 //TODO:
+/////////*---Implementações---*/////////////
+//colocar botão de fechar o jogo
+//colocar botão de voltar para o menu principal nos menus de tipo de jogo
+//animar os botões saindo do HUD e indo para o centro da tela quando ativar tela sucesso
 //Adicionar sistema de som em cada letra e ao cliclar falar o nome da letra
-//Trocar de ListToPopup (lista de cena) para Enum. Testar
-//sistema de troca de background da cena e das peças de forma aleatoria e de acordo como o tema (USAR PREFABS)
+//Gravar os audios
+//
+//
+//
 //sistema de idioma
-//Duvidas
 //
+/////////*---Gugs conhecidos---*/////////////
+//Palavras muito grade estrapolando a tela
+//Quando clica mais de uma vez sobre recarregar as peças no tipo: leitura, escreve mais de uma vez a palavra
 //
+
+/////////*---Ideias---*/////////////
+//Ideias
+//sistema de troca de background da cena e das peças, e das fontes de forma aleatoria e de acordo como o tema (USAR PREFABS)
 //
+//Animar a o menu principal
+//Animar os menus do tipo de jogo
+//Buscar novas imagens de crianças e backgrounds
 //
