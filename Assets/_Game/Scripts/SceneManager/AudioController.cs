@@ -1,16 +1,17 @@
+using System;
 using UnityEngine;
 
 namespace LearningByPlaying
 {
     public class AudioController : MonoBehaviour
     {
+        public static AudioController Instance;
+
         [Header("Audio Config")]
         [SerializeField] private AudioClip audioSucess;
         [SerializeField] private AudioClip audioFail;
 
         public AudioSource AudioSource;
-
-        public static AudioController Instance;
 
         private void Awake()
         {            
@@ -20,6 +21,11 @@ namespace LearningByPlaying
         public AudioClip LoadAudio(string gameType, string gameTheme, string audioName)
         {
             return Resources.Load<AudioClip>("Audios/" + gameType + "/" + gameTheme + "/" + audioName);
+        }
+
+        public AudioClip LoadAudio(string audioName)
+        {
+            return Resources.Load<AudioClip>("Audios/Miscellaneous/" + audioName);
         }
 
         public void PlaySoundPiece()

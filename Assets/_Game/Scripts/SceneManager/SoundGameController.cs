@@ -2,6 +2,7 @@ using LearningByPlaying.gameTheme;
 using LearningByPlaying.GameType;
 using LearningByPlaying.WordWriterSystem;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace LearningByPlaying
         public Transform ChoicesPlace { get => choicesPlace; }
 
         [Header("General Settings")]
-        [SerializeField] private string jsonPath;        
+        [SerializeField] private string jsonPath;
         [SerializeField] private Transform choicesPlace;
         [SerializeField] private GameObject SucessScreen;
         [SerializeField] private List<Piece> piecesSet;
@@ -27,7 +28,6 @@ namespace LearningByPlaying
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -44,9 +44,6 @@ namespace LearningByPlaying
 
         private void Start()
         {
-            print("Game Theme: " + CurrentGameTheme.GetGameTheme());//debug
-            print("Game Type: " + CurrentGameType.GetGameType());//debug
-
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
             StartGame();
@@ -59,13 +56,34 @@ namespace LearningByPlaying
             ImageController.Instance.SetImagePieces(piecesSet);
 
             PieceToChoose = piecesSet[UnityEngine.Random.Range(0, piecesSet.Count)];
-            audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameType.GetGameType(), CurrentGameTheme.GetGameTheme(), PieceToChoose.nameId);
-            AudioController.Instance.PlaySoundPiece();
 
             if (CurrentGameType.GetGameType() == GameTypes.Read.ToString())
             {
-                WordWriter.Instance.StartWordWriter(PieceToChoose.word);
+                PlayReadSound();
+                StartCoroutine(WriteWord());
             }
+            else
+            {
+                PlayPieceSound();
+            }
+        }
+
+        private void PlayPieceSound()
+        {
+            audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameType.GetGameType(), CurrentGameTheme.GetGameTheme(), PieceToChoose.nameId);
+            AudioController.Instance.PlaySoundPiece();
+        }
+
+        private void PlayReadSound()
+        {
+            audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameType.GetGameType());
+            AudioController.Instance.PlaySoundPiece();
+        }
+
+        private IEnumerator WriteWord()
+        {
+            yield return new WaitForSeconds(audioSource.clip.length);
+            WordWriter.Instance.StartWordWriter(PieceToChoose.word);
         }
 
         public void RestartGame()
@@ -82,6 +100,7 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceSuccess += ScoreManager.Instance.AddPoint;
             ChoiceSlot.OnChoiceSuccess += AudioController.Instance.PlaySoundSucess;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
+            WordWriter.OnFinishWrite += PlayPieceSound;
         }
 
         private void OnDisable()
@@ -92,6 +111,7 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceSuccess -= ScoreManager.Instance.AddPoint;
             ChoiceSlot.OnChoiceSuccess -= AudioController.Instance.PlaySoundSucess;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
+            WordWriter.OnFinishWrite -= PlayPieceSound;
         }
 
         private PiecesList GetJSONFile()

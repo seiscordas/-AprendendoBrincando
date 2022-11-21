@@ -1,15 +1,15 @@
 {
 	"pieces": [
 		{
-			"nameId": "Amora",
+			"nameId": "blackbarry",
 			"word": "Amora"
 		},
 		{
-			"nameId": "Manga",
+			"nameId": "mango",
 			"word": "Manga"
 		},
 		{
-			"nameId": "Ameixa",
+			"nameId": "plum",
 			"word": "Ameixa"
 		},
 		{
@@ -17,7 +17,7 @@
 			"word": "Maçã"
 		},
 		{
-			"nameId": "Banana",
+			"nameId": "banana",
 			"word": "Banana"
 		},
 		{
@@ -25,11 +25,11 @@
 			"word": "Mamão"
 		},
 		{
-			"nameId": "Caqui",
+			"nameId": "khaki",
 			"word": "Caqui"
 		},
 		{
-			"nameId": "Cereja",
+			"nameId": "cherry",
 			"word": "Cereja"
 		}	
 	]

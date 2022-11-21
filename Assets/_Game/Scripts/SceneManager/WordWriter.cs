@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,10 +8,13 @@ namespace LearningByPlaying.WordWriterSystem
 {
     public class WordWriter : MonoBehaviour
     {
+        public static event Action OnFinishWrite;
+        public static WordWriter Instance;
+
         [SerializeField] private Transform wordPlace;
         [SerializeField] private GameObject charSlot;
+        [SerializeField] private float timeDelay = 0.5f;
 
-        public static WordWriter Instance;
         private string word;
         private TextMeshProUGUI charSlotText;
         private List<GameObject> charSlotList = new List<GameObject>();
@@ -32,9 +36,10 @@ namespace LearningByPlaying.WordWriterSystem
             char[] leterList = word.ToCharArray();
             for (int i = 0; i < leterList.Length; i++)
             {
-                CharSlotCreator().PutCharInCharSlot(leterList[i]);
-                yield return new WaitForSeconds(0.5f);
+                CharSlotCreator().PutCharInCharSlot(leterList[i]);      
+                yield return new WaitForSeconds(timeDelay);
             }
+            OnFinishWrite?.Invoke();
         }
 
         private WordWriter CharSlotCreator()
@@ -52,13 +57,9 @@ namespace LearningByPlaying.WordWriterSystem
 
         private void CleanCharSlotList()
         {
-            if (charSlotList.Count > 0)
+            while (wordPlace.transform.childCount > 0)
             {
-                foreach (GameObject child in charSlotList)
-                {
-                    DestroyImmediate(child);
-                }
-                charSlotList.Clear();
+                DestroyImmediate(wordPlace.transform.GetChild(0).gameObject);
             }
         }
     }
