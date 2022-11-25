@@ -1,4 +1,5 @@
 using LearningByPlaying.gameTheme;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,15 +9,15 @@ namespace LearningByPlaying
     public class ImageController : MonoBehaviour
     {
         [Header("Image Config")]
-        [SerializeField] private string imagePath;
+        [SerializeField] private string imagePath;//TODO: MUDAR PARA VARIAVEL GLOBAL
 
-        SoundGameController sceneController;
+        ListenReadGameController sceneController;
 
         public static ImageController Instance;
 
         private void Awake()
         {
-            sceneController = GetComponent<SoundGameController>();
+            sceneController = GetComponent<ListenReadGameController>();
             Instance = this;
         }
 
@@ -25,9 +26,9 @@ namespace LearningByPlaying
             return Resources.Load<Sprite>(imagePath + imgTheme + "/" + imgName);
         }
 
-        public void SetImagePieces(List<Piece> piecesList)
+        public void SetImagePieces(List<Piece> piecesList, Transform choicesPlace)
         {
-            ChoicePiece[] choicesPlaceList = sceneController.ChoicesPlace.GetComponentsInChildren<ChoicePiece>();
+            ChoicePiece[] choicesPlaceList = choicesPlace.GetComponentsInChildren<ChoicePiece>();
             int index = 0;
             foreach (ChoicePiece choicePiece in choicesPlaceList)
             {

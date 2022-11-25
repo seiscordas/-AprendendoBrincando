@@ -2,7 +2,7 @@ namespace LearningByPlaying.gameTheme
 {
     public class CurrentGameTheme
     {
-        static string gameTheme;
+        static string gameTheme = GameThemes.None.ToString();
         public static string GetGameTheme()
         {
             return gameTheme;

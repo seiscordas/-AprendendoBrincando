@@ -1374,6 +1374,7 @@ MonoBehaviour:
   sceneName: ListenReadGame
   gameTheme: 2
   gameType: 1
+  audioProperty: 0
 --- !u!114 &728937658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2069,6 +2070,7 @@ MonoBehaviour:
   sceneName: ListenReadGame
   gameTheme: 3
   gameType: 1
+  audioProperty: 0
 --- !u!114 &1158246499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2454,6 +2456,7 @@ MonoBehaviour:
   sceneName: ListenReadGame
   gameTheme: 1
   gameType: 1
+  audioProperty: 2
 --- !u!114 &1432604978
 MonoBehaviour:
   m_ObjectHideFlags: 0

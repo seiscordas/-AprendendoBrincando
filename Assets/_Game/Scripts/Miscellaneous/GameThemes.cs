@@ -2,7 +2,7 @@ namespace LearningByPlaying.gameTheme
 {
     public enum GameThemes
     {
-        none,
+        None,
         Animals,
         Colors,
         Fruits,

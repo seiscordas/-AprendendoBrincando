@@ -15,10 +15,14 @@ namespace LearningByPlaying
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
-            canvasGroup = GetComponent<CanvasGroup>();
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
         }
 
-        public void OnPointerDown(PointerEventData eventData) { }
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (!canvas)
+                canvas = gameObject.transform.root.GetComponent<Canvas>();
+        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {

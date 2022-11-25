@@ -2,7 +2,7 @@ namespace LearningByPlaying.GameType
 {
     public class CurrentGameType
     {
-        static string gameType;
+        static string gameType = GameTypes.None.ToString();
         public static string GetGameType()
         {
             return gameType;

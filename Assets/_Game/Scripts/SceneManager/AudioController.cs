@@ -23,6 +23,11 @@ namespace LearningByPlaying
             return Resources.Load<AudioClip>("Audios/" + gameType + "/" + gameTheme + "/" + audioName);
         }
 
+        public AudioClip LoadAudio(string path, string audioName)
+        {
+            return Resources.Load<AudioClip>("Audios/" + path + "/" + audioName);
+        }
+
         public AudioClip LoadAudio(string audioName)
         {
             return Resources.Load<AudioClip>("Audios/Miscellaneous/" + audioName);

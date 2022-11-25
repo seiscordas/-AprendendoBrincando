@@ -1,0 +1,80 @@
+{
+	"pieces": [
+		{
+			"nameId": "bee",
+			"word": "abelha"
+		},
+		{
+			"nameId": "dog",
+			"word": "cachorro"
+		},
+		{
+			"nameId": "cat",
+			"word": "gato"
+		},
+		{
+			"nameId": "horse",
+			"word": "cavalo"
+		},
+		{
+			"nameId": "owl",
+			"word": "coruja"
+		},
+		{
+			"nameId": "snake",
+			"word": "cobra"
+		},
+		{
+			"nameId": "crow",
+			"word": "corvo"
+		},
+		{
+			"nameId": "cow",
+			"word": "vaca"
+		},
+		{
+			"nameId": "elephant",
+			"word": "elefante"
+		},
+		{
+			"nameId": "frog",
+			"word": "sapo"
+		},
+		{
+			"nameId": "giraffe",
+			"word": "girafa"
+		},
+		{
+			"nameId": "lion",
+			"word": "leão"
+		},
+		{
+			"nameId": "monkey",
+			"word": "macaco"
+		},
+		{
+			"nameId": "pig",
+			"word": "porco"
+		},
+		{
+			"nameId": "dove",
+			"word": "ponbo"
+		},
+		{
+			"nameId": "rat",
+			"word": "rato"
+		},
+		{
+			"nameId": "sheep",
+			"word": "ovelha"
+		},
+		{
+			"nameId": "wolf",
+			"word": "lobo"
+		},
+		{
+			"nameId": "rooster",
+			"word": "galo"
+		}	
+	]
+}

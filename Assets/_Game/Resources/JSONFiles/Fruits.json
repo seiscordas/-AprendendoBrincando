@@ -1,0 +1,36 @@
+{
+	"pieces": [
+		{
+			"nameId": "blackbarry",
+			"word": "Amora"
+		},
+		{
+			"nameId": "mango",
+			"word": "Manga"
+		},
+		{
+			"nameId": "plum",
+			"word": "Ameixa"
+		},
+		{
+			"nameId": "apple",
+			"word": "Maçã"
+		},
+		{
+			"nameId": "banana",
+			"word": "Banana"
+		},
+		{
+			"nameId": "papaia",
+			"word": "Mamão"
+		},
+		{
+			"nameId": "khaki",
+			"word": "Caqui"
+		},
+		{
+			"nameId": "cherry",
+			"word": "Cereja"
+		}	
+	]
+}

@@ -1,3 +1,4 @@
+using LearningByPlaying.AudioProperty;
 using LearningByPlaying.gameTheme;
 using LearningByPlaying.GameType;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace LearningByPlaying
         [SerializeField] GameThemes gameTheme = new();
         [Header("Select Game Types")]
         [SerializeField] GameTypes gameType = new();
+        [Header("Select Audio Property")]
+        [SerializeField] AudioProperties audioProperty = new();
 
 
         public void OnBeforeSerialize()
@@ -34,6 +37,7 @@ namespace LearningByPlaying
             button = GetComponent<Button>();
             button.onClick.AddListener(() => SetGameTheme(gameTheme.ToString()));
             button.onClick.AddListener(() => SetGameType(gameType.ToString()));
+            button.onClick.AddListener(() => SetAudioProperty(audioProperty.ToString()));
             button.onClick.AddListener(() => LoadScene(sceneName));
         }
 
@@ -69,6 +73,11 @@ namespace LearningByPlaying
         private void SetGameType(string gameType)
         {
             CurrentGameType.SetGameType(gameType);
+        }
+
+        private void SetAudioProperty(string audioProperty)
+        {
+            CurrentAudioProperty.SetAudioProperty(audioProperty);
         }
 
         public void OnAfterDeserialize() { }

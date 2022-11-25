@@ -11,38 +11,39 @@ namespace LearningByPlaying.WordWriterSystem
         public static event Action OnFinishWrite;
         public static WordWriter Instance;
 
-        [SerializeField] private Transform wordPlace;
-        [SerializeField] private GameObject charSlot;
         [SerializeField] private float timeDelay = 0.5f;
 
         private string word;
         private TextMeshProUGUI charSlotText;
-        private List<GameObject> charSlotList = new List<GameObject>();
+        [SerializeField] private List<GameObject> charSlotList = new();
+
+        public List<GameObject> CharSlotList { get => charSlotList; }
 
         private void Awake()
         {
             Instance = this;
         }
 
-        public void StartWordWriter(string word)
+        public void StartWordWriter(string word, GameObject charSlot, Transform wordPlace, float time = 0)
         {
-            CleanCharSlotList();
+            StopAllCoroutines();
+            timeDelay = (time == 0) ? timeDelay : time;
             this.word = word;
-            StartCoroutine(Write());
+            StartCoroutine(Write(charSlot, wordPlace));
         }
 
-        private IEnumerator Write()
+        private IEnumerator Write(GameObject charSlot, Transform wordPlace)
         {
             char[] leterList = word.ToCharArray();
             for (int i = 0; i < leterList.Length; i++)
             {
-                CharSlotCreator().PutCharInCharSlot(leterList[i]);      
+                CharSlotCreator(charSlot, wordPlace).PutCharInCharSlot(leterList[i]);      
                 yield return new WaitForSeconds(timeDelay);
             }
             OnFinishWrite?.Invoke();
         }
 
-        private WordWriter CharSlotCreator()
+        private WordWriter CharSlotCreator(GameObject charSlot, Transform wordPlace)
         {
             GameObject newCharSlot = Instantiate(charSlot, wordPlace);
             charSlotText = newCharSlot.GetComponentInChildren<TextMeshProUGUI>();
@@ -55,12 +56,13 @@ namespace LearningByPlaying.WordWriterSystem
             charSlotText.text = character.ToString();
         }
 
-        private void CleanCharSlotList()
+        public void CleanCharSlotList()
         {
-            while (wordPlace.transform.childCount > 0)
+            foreach (var item in charSlotList)
             {
-                DestroyImmediate(wordPlace.transform.GetChild(0).gameObject);
+                DestroyImmediate(item.gameObject);
             }
+            charSlotList.Clear();
         }
     }
 }

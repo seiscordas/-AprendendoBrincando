@@ -347,9 +347,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonPath: JSONFiles/
+  choiceSlot: {fileID: 1648016975}
   choicesPlace: {fileID: 1584239120}
   SucessScreen: {fileID: 416206646}
-  piecesSet: []
+  wordPlace: {fileID: 1420398451}
+  charSlot: {fileID: 3124315162353789769, guid: fc713f0cac5f26648b843d3518890807, type: 3}
 --- !u!114 &198755448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,8 +420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab150bf8ae9d30546af326fc6dbdeff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordPlace: {fileID: 1420398451}
-  charSlot: {fileID: 3124315162353789769, guid: fc713f0cac5f26648b843d3518890807, type: 3}
   timeDelay: 1
 --- !u!1 &252194737
 GameObject:
@@ -1460,7 +1460,6 @@ GameObject:
   - component: {fileID: 1103506777}
   - component: {fileID: 1103506779}
   - component: {fileID: 1103506778}
-  - component: {fileID: 1103506781}
   - component: {fileID: 1103506780}
   - component: {fileID: 1103506782}
   m_Layer: 5
@@ -1541,18 +1540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2014411932}
---- !u!225 &1103506781
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103506776}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &1103506782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,7 +1564,6 @@ GameObject:
   - component: {fileID: 1210714633}
   - component: {fileID: 1210714637}
   - component: {fileID: 1210714636}
-  - component: {fileID: 1210714635}
   - component: {fileID: 1210714634}
   - component: {fileID: 1210714638}
   m_Layer: 5
@@ -1620,18 +1606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2014411932}
---- !u!225 &1210714635
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210714632}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &1210714636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,7 +1668,6 @@ GameObject:
   - component: {fileID: 1295426265}
   - component: {fileID: 1295426269}
   - component: {fileID: 1295426268}
-  - component: {fileID: 1295426267}
   - component: {fileID: 1295426266}
   - component: {fileID: 1295426270}
   m_Layer: 5
@@ -1737,18 +1710,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2014411932}
---- !u!225 &1295426267
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295426264}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &1295426268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2357,7 +2318,7 @@ GameObject:
   - component: {fileID: 1584239120}
   - component: {fileID: 1584239121}
   m_Layer: 5
-  m_Name: Choices
+  m_Name: PiecesChoicePlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2714,6 +2675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fcdc6c1863a1c3419550cc8ac0c11ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pieceToChoose: 
 --- !u!1 &1722670892
 GameObject:
   m_ObjectHideFlags: 0

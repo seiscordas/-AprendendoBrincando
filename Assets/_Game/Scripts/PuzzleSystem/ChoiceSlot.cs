@@ -11,7 +11,10 @@ namespace LearningByPlaying
         public static event Action<ChoicePiece> OnChoiceFailChoicePiece;
         public static event Action<ChoicePiece> OnChoiceSuccessChoicePiece;
 
-        PointerEventData currentEventData;
+        [SerializeField] PointerEventData currentEventData;
+        [SerializeField] private string pieceToChoose;
+
+        public string PieceToChoose { get => pieceToChoose; set => pieceToChoose = value; }
 
         public void OnDrop(PointerEventData eventData)
         {
@@ -43,7 +46,7 @@ namespace LearningByPlaying
         private bool CheckProgress(PointerEventData eventData)
         {
             ChoicePiece choicePiece = eventData.pointerDrag.GetComponent<ChoicePiece>();
-            if(SoundGameController.PieceCompare(choicePiece))
+            if(choicePiece.nameId == pieceToChoose)
             {
                 currentEventData = eventData;
                 Success(choicePiece);
