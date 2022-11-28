@@ -2,6 +2,7 @@ using LearningByPlaying.AudioProperty;
 using LearningByPlaying.gameTheme;
 using LearningByPlaying.GameType;
 using LearningByPlaying.WordWriterSystem;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace LearningByPlaying
     {
         //public static ListenWriteGameController Instance;
         //public static Piece PieceToChoose { get; private set; }
+        public static event Action OnFinishPlayAudioClip;
 
         private AudioSource audioSource;
         private int goalsQuantity;
@@ -20,6 +22,7 @@ namespace LearningByPlaying
 
         [Header("General Settings")]
         [SerializeField] private string jsonPath;//TODO: MUDAR PARA VARIAVEL GLOBAL
+        [SerializeField] private GameObject LockSceen;
         [Header("SucessScreen Settings")]
         [SerializeField] private GameObject SucessScreen;
 
@@ -28,9 +31,10 @@ namespace LearningByPlaying
         [SerializeField] private Transform choicesWordPlace;
         [SerializeField] private GameObject ChoiceSlotAlphabet;
         [SerializeField] private GameObject CharChoiceDragDrop;
+        [SerializeField] private float wordWiretDelay = 0.5f;
 
         [Header("Image Settings")]
-        [SerializeField] private Image image;
+        [SerializeField] private Image wordImage;
 
         private void Awake()
         {
@@ -56,7 +60,6 @@ namespace LearningByPlaying
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
             StartGame();
-            StartListening();
         }
 
         private IEnumerator CreateChoiceSlots()
@@ -87,6 +90,8 @@ namespace LearningByPlaying
 
         private void StartGame()
         {
+            ToggleShowLockScreen();
+
             piece = SetPieceWord(GetJSONFile());
 
             SetImage();
@@ -94,11 +99,12 @@ namespace LearningByPlaying
             PlayWriteSound();
             StartCoroutine(WriteWord());
             SetGoalsQuantity();
+            StartListening();
         }
 
         public void SetImage()
         {
-            image.sprite = ImageController.Instance.LoadImage(CurrentGameTheme.GetGameTheme(), piece.nameId);
+            wordImage.sprite = ImageController.Instance.LoadImage(CurrentGameTheme.GetGameTheme(), piece.nameId);
         }
 
         private void SetGoalsQuantity()
@@ -106,11 +112,18 @@ namespace LearningByPlaying
             goalsQuantity = piece.word.ToCharArray().Length;
         }
 
-        private void PlayPieceSound()
+        private void PlayPieceSoundCoroutine()
+        {
+            StartCoroutine(PlayPieceSound());
+        }
+
+        private IEnumerator PlayPieceSound()
         {
             string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
             audioSource.clip = AudioController.Instance.LoadAudio(audioPath, piece.nameId);
             AudioController.Instance.PlaySoundPiece();
+            yield return new WaitForSeconds(audioSource.clip.length);
+            OnFinishPlayAudioClip?.Invoke();
         }
 
         private void PlayWriteSound()
@@ -122,11 +135,12 @@ namespace LearningByPlaying
         private IEnumerator WriteWord()
         {
             yield return new WaitForSeconds(audioSource.clip.length);
-            WordWriter.Instance.StartWordWriter(piece.word, CharChoiceDragDrop, choicesWordPlace);
+            WordWriter.Instance.StartWordWriter(piece.word, CharChoiceDragDrop, choicesWordPlace, wordWiretDelay);
         }
 
         public void RestartGame()
         {
+            StopListening();
             StopAllCoroutines();
             CleanWordFromScene();
             ToggleAutoAlign();
@@ -151,6 +165,8 @@ namespace LearningByPlaying
 
             if (goalsQuantity <= 0)
                 Sucsess();
+            else
+                AudioController.Instance.PlaySoundSucessProgress();
         }
 
         private void Sucsess()
@@ -158,6 +174,7 @@ namespace LearningByPlaying
             ToggleShowSucessScreen();
             ScoreManager.Instance.AddPoint();
             AudioController.Instance.PlaySoundSucess();
+            StopListening();
         }
 
         private void StartListening()
@@ -165,21 +182,28 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceFail += Fail;
             ChoiceSlot.OnChoiceSuccess += CheckForProgresse;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
-            WordWriter.OnFinishWrite += FinisWrite;
+            WordWriter.OnFinishWriteWord += WordWriterFinished;
+            OnFinishPlayAudioClip += ToggleShowLockScreen;
         }
 
         private void OnDisable()
         {
+            StopListening();
+        }
+
+        private void StopListening()
+        {
             ChoiceSlot.OnChoiceFail -= Fail;
             ChoiceSlot.OnChoiceSuccess -= CheckForProgresse;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
-            WordWriter.OnFinishWrite -= FinisWrite;
+            WordWriter.OnFinishWriteWord -= WordWriterFinished;
+            OnFinishPlayAudioClip -= ToggleShowLockScreen;
         }
 
-        private void FinisWrite()
+        private void WordWriterFinished()
         {
             ToggleAutoAlign();
-            PlayPieceSound();
+            PlayPieceSoundCoroutine();
             StartCreateChoiceSlots();
             AnimateShuffle();
         }
@@ -192,7 +216,7 @@ namespace LearningByPlaying
 
         private Piece SetPieceWord(PiecesList piecesList)
         {
-            Piece piece = piecesList.pieces[Random.Range(0, piecesList.pieces.Length)];
+            Piece piece = piecesList.pieces[UnityEngine.Random.Range(0, piecesList.pieces.Length)];
             return piece;
         }
 
@@ -200,11 +224,6 @@ namespace LearningByPlaying
         {
             Transform[] children = choicesWordPlace.GetComponentsInChildren<Transform>();
             ShuffleAnimate.Animate(WordWriter.Instance.CharSlotList);
-        }
-
-        public void PlaySound()
-        {
-            audioSource.Play();
         }
 
         private void ToggleShowSucessScreen()
@@ -217,30 +236,10 @@ namespace LearningByPlaying
             HorizontalLayoutGroup hlg = choicesWordPlace.GetComponentInParent<HorizontalLayoutGroup>();
             hlg.enabled = !hlg.enabled;
         }
+
+        private void ToggleShowLockScreen()
+        {
+            LockSceen.SetActive(!LockSceen.activeSelf);
+        }
     }
 }
-
-//TODO:
-/////////*---Implementações---*/////////////
-//colocar botão de fechar o jogo
-//colocar botão de voltar para o menu principal nos menus de tipo de jogo
-//animar os botões saindo do HUD e indo para o centro da tela quando ativar tela sucesso
-//Gravar os audios
-//
-//
-//
-//sistema de idioma
-//
-/////////*---Gugs conhecidos---*/////////////
-//Palavras muito grade estrapolando a tela
-//Quando clica mais de uma vez sobre recarregar as peças no tipo: leitura, escreve mais de uma vez a palavra
-//
-
-/////////*---Ideias---*/////////////
-//Ideias
-//sistema de troca de background da cena e das peças, e das fontes de forma aleatoria e de acordo como o tema (USAR PREFABS)
-//
-//Animar a o menu principal
-//Animar os menus do tipo de jogo
-//Buscar novas imagens de crianças e backgrounds
-//

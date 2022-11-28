@@ -12,11 +12,12 @@ namespace LearningByPlaying
 {
     public class ListenReadGameController : MonoBehaviour
     {
-        public static ListenReadGameController Instance;
+        public static event Action OnFinishPlayAudioClip;
         public static Piece PieceToChoose { get; private set; }
 
         [Header("General Settings")]
         [SerializeField] private string jsonPath;//TODO: MUDAR PARA VARIAVEL GLOBAL
+        [SerializeField] private GameObject LockSceen;
         [Header("Game Pieces Settings")]
         [SerializeField] private ChoiceSlot choiceSlot;
         [SerializeField] private Transform choicesPlace;
@@ -25,27 +26,19 @@ namespace LearningByPlaying
         [Header("Word Writer Settings")]
         [SerializeField] private Transform wordPlace;
         [SerializeField] private GameObject charSlot;
+        [SerializeField] private float wordWiretDelay = 0.5f;
 
         private List<Piece> piecesSet;
         private AudioSource audioSource;
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else if (Instance != this)
-            {
-                Destroy(gameObject);
-            }
-
             //somente para executar teste direto na cena.
             if (CurrentGameTheme.GetGameTheme() == GameThemes.None.ToString())
             {
                 CurrentGameTheme.SetGameTheme(GameThemes.Fruits.ToString());
                 CurrentGameType.SetGameType(GameTypes.Read.ToString());
-                CurrentAudioProperty.SetAudioProperty(AudioProperties.Sound.ToString());
+                CurrentAudioProperty.SetAudioProperty(AudioProperties.None.ToString());
             }
             print("GameTheme: " + CurrentGameTheme.GetGameTheme().ToString() + " | GameType: " + CurrentGameType.GetGameType().ToString() + " | AudioProperty: " + CurrentAudioProperty.GetAudioProperty().ToString());
         }
@@ -55,11 +48,12 @@ namespace LearningByPlaying
             audioSource = gameObject.AddComponent<AudioSource>();
             AudioController.Instance.AudioSource = audioSource;
             StartGame();
-            StartListening();
         }
 
         private void StartGame()
         {
+            ToggleShowLockScreen();
+
             piecesSet = Shuffle(CreatePiecesSet(GetJSONFile()));//TODO: COLOCAR METODOS EM CADEIA CreatePiecesSet->Shuffle
             ImageController.Instance.SetImagePieces(piecesSet, choicesPlace);
 
@@ -73,16 +67,23 @@ namespace LearningByPlaying
             }
             else
             {
-                PlayPieceSound();
+                StartCoroutine(PlayPieceSound());
             }
+            StartListening();
         }
 
-        private void PlayPieceSound()
+        private void PlayPieceSoundCoroutine()
         {
-            //audioSource.clip = AudioController.Instance.LoadAudio(CurrentGameTheme.GetGameTheme(), PieceToChoose.nameId);
+            StartCoroutine(PlayPieceSound());
+        }
+
+        private IEnumerator PlayPieceSound()
+        {
             string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
             audioSource.clip = AudioController.Instance.LoadAudio(audioPath, PieceToChoose.nameId);
             AudioController.Instance.PlaySoundPiece();
+            yield return new WaitForSeconds(audioSource.clip.length);
+            OnFinishPlayAudioClip?.Invoke();
         }
 
         private void PlayReadSound()
@@ -94,11 +95,12 @@ namespace LearningByPlaying
         private IEnumerator WriteWord()
         {
             yield return new WaitForSeconds(audioSource.clip.length);
-            WordWriter.Instance.StartWordWriter(PieceToChoose.word, charSlot, wordPlace);
+            WordWriter.Instance.StartWordWriter(PieceToChoose.word, charSlot, wordPlace, wordWiretDelay);
         }
 
         public void RestartGame()
         {
+            StopListening();
             StopAllCoroutines();
             CleanWordFromScene();
             StartGame();
@@ -107,28 +109,33 @@ namespace LearningByPlaying
 
         private void StartListening()
         {
-            ChoiceSlot.OnChoiceFail += ScreenShaker.Instance.ShakeIt;
-            ChoiceSlot.OnChoiceFail += AudioController.Instance.PlaySoundFail;
+            ChoiceSlot.OnChoiceFail += Fail;
             ChoiceSlot.OnChoiceSuccess += Sucsess;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
-            WordWriter.OnFinishWrite += PlayPieceSound;
+            WordWriter.OnFinishWriteWord += PlayPieceSoundCoroutine;
+            OnFinishPlayAudioClip += ToggleShowLockScreen;
         }
 
         private void OnDisable()
         {
+            StopListening();
+        }
+
+        private void StopListening()
+        {
             ChoiceSlot.OnChoiceFail -= Fail;
-            ChoiceSlot.OnChoiceSuccess -= ToggleShowSucessScreen;
-            ChoiceSlot.OnChoiceSuccess -= ScoreManager.Instance.AddPoint;
-            ChoiceSlot.OnChoiceSuccess -= AudioController.Instance.PlaySoundSucess;
+            ChoiceSlot.OnChoiceSuccess -= Sucsess;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
-            WordWriter.OnFinishWrite -= PlayPieceSound;
+            WordWriter.OnFinishWriteWord -= PlayPieceSoundCoroutine;
+            OnFinishPlayAudioClip -= ToggleShowLockScreen;
         }
 
         private void Sucsess()
         {
-            ToggleShowSucessScreen();
+            SucessScreen.SetActive(true);
             ScoreManager.Instance.AddPoint();
             AudioController.Instance.PlaySoundSucess();
+            WordWriter.OnFinishWriteWord -= PlayPieceSoundCoroutine;
         }
 
         private void Fail()
@@ -164,38 +171,28 @@ namespace LearningByPlaying
             return piecesList.OrderBy(x => Guid.NewGuid()).ToList();
         }
 
-        public void PlaySound()
-        {
-            audioSource.Play();
-        }
-
         private void CleanWordFromScene()
         {
             WordWriter.Instance.CleanCharSlotList();
         }
 
-        private void ToggleShowSucessScreen()
+        private void ToggleShowLockScreen()
         {
-            SucessScreen.SetActive(!SucessScreen.activeSelf);
+            LockSceen.SetActive(!LockSceen.activeSelf);
         }
     }
 }
 
 //TODO: trocar contagem de sucesso neste arquivo
 /////////*---Implementações---*/////////////
-//Não deixar interagir com a cena enquanto não for carregada por completa (colocar um painel transparente na frente de tudo)
-//colocar botão de fechar o jogo
-//colocar botão de voltar para o menu principal nos menus de tipo de jogo
+//carregar background de acordo com thema
 //animar os botões saindo do HUD e indo para o centro da tela quando ativar tela sucesso
 //Gravar os audios
-//
 //
 //
 //sistema de idioma
 //
 /////////*---Gugs conhecidos---*/////////////
-//Palavras muito grade estrapolando a tela
-//Quando clica mais de uma vez sobre recarregar as peças no tipo: leitura, escreve mais de uma vez a palavra
 //Repete peça com muita frequencia
 //
 

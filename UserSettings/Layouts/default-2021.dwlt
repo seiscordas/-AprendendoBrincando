@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 78
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 114
+  controlID: 100
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 82
+  controlID: 79
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -614,9 +614,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.73733276, y: -0.36895058, z: 0.49695435}
+    m_Target: {x: 0, y: 0, z: 0}
     speed: 2
-    m_Value: {x: -0.73733276, y: -0.36895058, z: 0.49695435}
+    m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -667,9 +667,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 5.782369
+    m_Target: 10
     speed: 2
-    m_Value: 5.782369
+    m_Value: 10
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -725,9 +725,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a8640000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 62afffff9cb0ffff06b2ffff7cb5ffff08baffff74beffff0cdcffff68dcffff00deffff24deffff28deffff2cdeffff34deffff38deffff56deffff5edeffff66deffff68deffff6adeffff6cdeffff6edeffff8ce4ffffe4e4ffff96f6ffff10faffff426200007e62000082620000fe6700007e68000082680000f685000032860000368600006c9600008aa8000064aa0000d8aa0000f8aa000006ab000028ab000088b40000fcb400004cb5000092b700001eb80000
+      m_SelectedIDs: b29b0000
+      m_LastClickedID: 39858
+      m_ExpandedIDs: fabfffff38c1ffffd4c1ffff22d0ffff10faffff70620000786200000e630000f69a0000889b00008c9b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -792,22 +792,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Game/Resources/Audios/Alphabet
+    - Assets/_Game/Scene
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/_Game/Resources/Audios/Alphabet
+  - Assets/_Game/Scene
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Git\Meus Projetos Unity\AprendendoBrincando
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: c0660000
-    m_LastClickedID: 26304
-    m_ExpandedIDs: 000000000c6300000e63000010630000126300001463000016630000186300001a6300001c6300001e6300002063000022630000b6660000c266000000ca9a3bffffff7f
+    m_SelectedIDs: 1e680000
+    m_LastClickedID: 26654
+    m_ExpandedIDs: 00000000d2670000d4670000d6670000d8670000da670000dc670000de670000e0670000e2670000e4670000e6670000e86700000e68000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -835,7 +835,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000c6300000e63000010630000126300001463000016630000186300001a6300001c6300001e6300002063000022630000
+    m_ExpandedIDs: 00000000d2670000d4670000d6670000d8670000da670000dc670000de670000e0670000e2670000e4670000e6670000e8670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -860,21 +860,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: b29b0000
+    m_LastClickedInstanceID: 39858
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 0c6200000063000000000000486700001ee6feffc463000042630000ba620000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Animals
-      m_OriginalName: Animals
+      m_Name: Scene
+      m_OriginalName: Scene
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 26136
+      m_UserData: 26654
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_SimulatorState:
     controlPanelVisible: 0
-    controlPanelWidth: 0
+    controlPanelWidth: NaN
     controlPanelFoldoutKeys:
     - UnityEditor.AdaptivePerformance.Editor.AdaptivePerformanceUIExtension
     - UnityEditor.AdaptivePerformance.Samsung.Android.Editor.AdaptivePerformanceVRRUIExtension
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     - '{"m_SerializationStates":{"thermalFoldout":false,"performanceFoldout":false,"developerFoldout":false,"indexerFoldout":false,"scalersFoldout":false,"deviceSettingsFoldout":false}}'
     - '{"m_SerializationStates":{"settingsFoldout":false,"vrrFoldout":false,"androidSystemFoldout":false}}'
     - '{}'
-    scale: 36
+    scale: 10
     fitToScreenEnabled: 1
     rotationDegree: 90
     highlightSafeAreaEnabled: 0

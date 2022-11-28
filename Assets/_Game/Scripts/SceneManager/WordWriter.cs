@@ -8,10 +8,8 @@ namespace LearningByPlaying.WordWriterSystem
 {
     public class WordWriter : MonoBehaviour
     {
-        public static event Action OnFinishWrite;
+        public static event Action OnFinishWriteWord;
         public static WordWriter Instance;
-
-        [SerializeField] private float timeDelay = 0.5f;
 
         private string word;
         private TextMeshProUGUI charSlotText;
@@ -24,15 +22,13 @@ namespace LearningByPlaying.WordWriterSystem
             Instance = this;
         }
 
-        public void StartWordWriter(string word, GameObject charSlot, Transform wordPlace, float time = 0)
+        public void StartWordWriter(string word, GameObject charSlot, Transform wordPlace, float timeDelay)
         {
-            StopAllCoroutines();
-            timeDelay = (time == 0) ? timeDelay : time;
             this.word = word;
-            StartCoroutine(Write(charSlot, wordPlace));
+            StartCoroutine(Write(charSlot, wordPlace, timeDelay));
         }
 
-        private IEnumerator Write(GameObject charSlot, Transform wordPlace)
+        private IEnumerator Write(GameObject charSlot, Transform wordPlace, float timeDelay)
         {
             char[] leterList = word.ToCharArray();
             for (int i = 0; i < leterList.Length; i++)
@@ -40,7 +36,7 @@ namespace LearningByPlaying.WordWriterSystem
                 CharSlotCreator(charSlot, wordPlace).PutCharInCharSlot(leterList[i]);      
                 yield return new WaitForSeconds(timeDelay);
             }
-            OnFinishWrite?.Invoke();
+            OnFinishWriteWord?.Invoke();
         }
 
         private WordWriter CharSlotCreator(GameObject charSlot, Transform wordPlace)

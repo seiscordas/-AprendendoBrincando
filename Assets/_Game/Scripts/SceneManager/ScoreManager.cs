@@ -1,4 +1,5 @@
 using LearningByPlaying.gameTheme;
+using LearningByPlaying.GameType;
 using TMPro;
 using UnityEngine;
 
@@ -20,18 +21,19 @@ namespace LearningByPlaying
 
         private void Start()
         {
-            highscore = PlayerPrefsDataBase.Instance.ReadIntInfo(CurrentGameTheme.GetGameTheme());
+            string key = CurrentGameType.GetGameType() + "_" + CurrentGameTheme.GetGameTheme();
+            highscore = PlayerPrefsDataBase.Instance.ReadIntInfo(key);
             score = highscore;
-            scoreText.text = score.ToString();
+            scoreText.text = score.ToString().PadLeft(5, '0');
         }
 
         public void AddPoint()
         {
+            string key = CurrentGameType.GetGameType() + "_" + CurrentGameTheme.GetGameTheme();
             score++;
-            scoreText.text = score.ToString();
+            scoreText.text = score.ToString().PadLeft(5, '0');
             if (score > highscore)
-                PlayerPrefsDataBase.Instance.SaveIntInfo(CurrentGameTheme.GetGameTheme(), score);
-            //PlayerPrefs.SetInt(nameof(highscore), score);
+                PlayerPrefsDataBase.Instance.SaveIntInfo(key, score);
         }
     }
 }

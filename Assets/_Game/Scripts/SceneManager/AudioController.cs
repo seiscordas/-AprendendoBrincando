@@ -9,6 +9,7 @@ namespace LearningByPlaying
 
         [Header("Audio Config")]
         [SerializeField] private AudioClip audioSucess;
+        [SerializeField] private AudioClip audioSucessProgress;
         [SerializeField] private AudioClip audioFail;
 
         public AudioSource AudioSource;
@@ -41,6 +42,11 @@ namespace LearningByPlaying
         public void PlaySoundSucess()
         {
             AudioSource.PlayOneShot(audioSucess);
+        }
+
+        public void PlaySoundSucessProgress()
+        {
+            AudioSource.PlayOneShot(audioSucessProgress);
         }
 
         public void PlaySoundFail()
