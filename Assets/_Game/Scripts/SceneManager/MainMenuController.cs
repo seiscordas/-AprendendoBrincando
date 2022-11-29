@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private Transform titleText;
+    [SerializeField] private Transform titlePlace;
     [SerializeField] private GameObject gameObjectChar;
 
-    private void OnEnable()
+    private void Start()
     {
-        WordWriter.Instance.StartWordWriter("aprendendo brincando", gameObjectChar, titleText, 0.1f);
+        WordWriter.Instance.StartWordWriter("aprendendo brincando", gameObjectChar, titlePlace, 0.1f);
         WordWriter.OnFinishWriteWord += DisableAutoAlign;
         WordWriter.OnFinishWriteWord += StartJumpCoroutine;
     }
@@ -24,11 +24,11 @@ public class MainMenuController : MonoBehaviour
 
     private IEnumerator Jump()
     {
-        for (int i = 0; i < titleText.childCount; i++)
+        for (int i = 0; i < titlePlace.childCount; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            Vector3 position = titleText.GetChild(i).localPosition;
-            titleText.GetChild(i).transform.DOLocalJump(new Vector3(position.x, 3f, position.z), 1f, 1, 0.2f).SetLoops(-1, LoopType.Yoyo);
+            Vector3 position = titlePlace.GetChild(i).localPosition;
+            titlePlace.GetChild(i).transform.DOLocalJump(new Vector3(position.x, 3f, position.z), 1f, 1, 0.2f).SetLoops(-1, LoopType.Yoyo);
         }
     }
 
@@ -39,7 +39,7 @@ public class MainMenuController : MonoBehaviour
 
     private void DisableAutoAlign()
     {
-        titleText.GetComponentInParent<HorizontalLayoutGroup>().enabled = false;
+        titlePlace.GetComponentInParent<HorizontalLayoutGroup>().enabled = false;
     }
 }
 
