@@ -31,10 +31,12 @@ public class ThemeController : MonoBehaviour
         string imagePath = "Themes/" + CurrentGameTheme.GetGameTheme() + "/Default/";
         for (int i = 0; i < imageList.Count; i++)
         {
-            Texture image = Resources.Load<Texture>(imagePath + i);
+            int imageName = i + 1;
+            Texture image = Resources.Load<Texture>(imagePath + imageName);
+            print(i + " image: " + imageName);
             if (image != null)
             {
-                imageList[i].material.mainTexture = Resources.Load<Texture>(imagePath + i);
+                imageList[i].material.mainTexture = image;
                 imageList[i].material.mainTexture.wrapMode = TextureWrapMode.Repeat;
             }
         }
