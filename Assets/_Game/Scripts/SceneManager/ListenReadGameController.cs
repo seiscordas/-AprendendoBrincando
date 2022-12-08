@@ -199,8 +199,5 @@ namespace LearningByPlaying
 /////////*---Ideias---*/////////////
 //Ideias
 //sistema de troca de background da cena e das peças, e das fontes de forma aleatoria e de acordo como o tema (USAR PREFABS)
-//
-//Animar a o menu principal
+//Criar sistema de escolha de thema
 //Animar os menus do tipo de jogo
-//Buscar novas imagens de crianças e backgrounds
-//
