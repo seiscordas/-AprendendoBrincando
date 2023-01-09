@@ -1,36 +1,124 @@
 {
 	"pieces": [
 		{
-			"nameId": "blackbarry",
-			"word": "Amora"
-		},
-		{
-			"nameId": "mango",
-			"word": "Manga"
-		},
-		{
-			"nameId": "plum",
-			"word": "Ameixa"
-		},
-		{
 			"nameId": "apple",
-			"word": "Maçã"
+			"word": "maçã"
 		},
 		{
 			"nameId": "banana",
-			"word": "Banana"
+			"word": "banana"
 		},
 		{
-			"nameId": "papaia",
-			"word": "Mamão"
+			"nameId": "bean",
+			"word": "feijão"
 		},
 		{
-			"nameId": "khaki",
-			"word": "Caqui"
+			"nameId": "blackberry",
+			"word": "amora"
+		},
+		{
+			"nameId": "carrot",
+			"word": "cenoura"
+		},
+		{
+			"nameId": "cashew",
+			"word": "caju"
 		},
 		{
 			"nameId": "cherry",
-			"word": "Cereja"
-		}	
+			"word": "cereja"
+		},
+		{
+			"nameId": "coconut",
+			"word": "côco"
+		},
+		{
+			"nameId": "corn",
+			"word": "milho"
+		},
+		{
+			"nameId": "cucumber",
+			"word": "pepino"
+		},
+		{
+			"nameId": "fig",
+			"word": "figo"
+		},
+		{
+			"nameId": "garlic",
+			"word": "alho"
+		},
+		{
+			"nameId": "grape",
+			"word": "uva"
+		},
+		{
+			"nameId": "khaki",
+			"word": "caqui"
+		},
+		{
+			"nameId": "kiwi",
+			"word": "kiwi"
+		},
+		{
+			"nameId": "lemon",
+			"word": "limão"
+		},
+		{
+			"nameId": "lettuce",
+			"word": "alface"
+		},
+		{
+			"nameId": "mango",
+			"word": "manga"
+		},
+		{
+			"nameId": "melon",
+			"word": "melão"
+		},
+		{
+			"nameId": "nut",
+			"word": "noz"
+		},
+		{
+			"nameId": "orange",
+			"word": "laranja"
+		},
+		{
+			"nameId": "papaia",
+			"word": "mamão"
+		},
+		{
+			"nameId": "pear",
+			"word": "pera"
+		},
+		{
+			"nameId": "pineapple",
+			"word": "abacaxi"
+		},
+		{
+			"nameId": "plum",
+			"word": "ameixa"
+		},
+		{
+			"nameId": "pomegranate",
+			"word": "romã"
+		},
+		{
+			"nameId": "potato",
+			"word": "batata"
+		},
+		{
+			"nameId": "strawberry",
+			"word": "morango"
+		},
+		{
+			"nameId": "tomato",
+			"word": "tomate"
+		},
+		{
+			"nameId": "turnip",
+			"word": "nabo"
+		}
 	]
 }

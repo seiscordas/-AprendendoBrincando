@@ -28,6 +28,8 @@ namespace LearningByPlaying
         [SerializeField] private GameObject charSlot;
         [SerializeField] private float wordWiretDelay = 0.5f;
 
+        [SerializeField] private PiecesList piecesSetDebug;
+
         private List<Piece> piecesSet;
         private AudioSource audioSource;
 
@@ -60,6 +62,8 @@ namespace LearningByPlaying
             PieceToChoose = piecesSet[UnityEngine.Random.Range(0, piecesSet.Count)];
             choiceSlot.PieceToChoose = PieceToChoose.nameId;
 
+            Debug.Log("PieceToChoose: "+choiceSlot.PieceToChoose);
+
             if (CurrentGameType.GetGameType() == GameTypes.Read.ToString())
             {
                 PlayReadSound();
@@ -79,7 +83,9 @@ namespace LearningByPlaying
 
         private IEnumerator PlayPieceSound()
         {
-            string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
+            //string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
+            string audioPath = CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty();
+            Debug.Log("audioPath:" + audioPath);
             audioSource.clip = AudioController.Instance.LoadAudio(audioPath, PieceToChoose.nameId);
             AudioController.Instance.PlaySoundPiece();
             yield return new WaitForSeconds(audioSource.clip.length);
@@ -146,7 +152,8 @@ namespace LearningByPlaying
 
         private PiecesList GetJSONFile()
         {
-            var jsonFile = Resources.Load(jsonPath + CurrentGameType.GetGameType().ToString() + "/" + CurrentGameTheme.GetGameTheme()).ToString();
+            var jsonFile = Resources.Load(jsonPath + CurrentGameTheme.GetGameTheme()).ToString();
+            piecesSetDebug = JsonUtility.FromJson<PiecesList>(jsonFile);
             return JsonUtility.FromJson<PiecesList>(jsonFile);
         }
 
@@ -185,19 +192,14 @@ namespace LearningByPlaying
 
 //TODO: trocar contagem de sucesso neste arquivo
 /////////*---Implementações---*/////////////
-//carregar background de acordo com thema
-//animar os botões saindo do HUD e indo para o centro da tela quando ativar tela sucesso
 //Gravar os audios
-//
-//
 //sistema de idioma
-//
+
 /////////*---Gugs conhecidos---*/////////////
 //Repete peça com muita frequencia
-//
 
 /////////*---Ideias---*/////////////
-//Ideias
-//sistema de troca de background da cena e das peças, e das fontes de forma aleatoria e de acordo como o tema (USAR PREFABS)
 //Criar sistema de escolha de thema
+//sistema de troca de background da cena e das peças, e das fontes de acordo como o tema (USAR PREFABS)
 //Animar os menus do tipo de jogo
+//animar os botões saindo do HUD e indo para o centro da tela quando ativar tela sucesso

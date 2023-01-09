@@ -47,7 +47,7 @@ namespace LearningByPlaying
             if (CurrentGameTheme.GetGameTheme() == GameThemes.None.ToString())
             {
                 CurrentGameTheme.SetGameTheme(GameThemes.Fruits.ToString());
-                CurrentGameType.SetGameType(GameTypes.Write.ToString());
+                CurrentGameType.SetGameType(GameTypes.Listen.ToString());
                 CurrentAudioProperty.SetAudioProperty(AudioProperties.None.ToString());
             }
             print("GameTheme: " + CurrentGameTheme.GetGameTheme().ToString() + " | GameType: " + CurrentGameType.GetGameType().ToString() + " | AudioProperty: " + CurrentAudioProperty.GetAudioProperty().ToString());
@@ -119,7 +119,7 @@ namespace LearningByPlaying
 
         private IEnumerator PlayPieceSound()
         {
-            string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
+            string audioPath = CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty();
             audioSource.clip = AudioController.Instance.LoadAudio(audioPath, piece.nameId);
             AudioController.Instance.PlaySoundPiece();
             yield return new WaitForSeconds(audioSource.clip.length);
@@ -243,3 +243,6 @@ namespace LearningByPlaying
         }
     }
 }
+//TODO:
+//erro conhecido
+//quando arrasta uma letra e contabiliza acerto, se arrastar a mesma letra contabiliza acerto novamente

@@ -1,28 +1,44 @@
 {
 	"pieces": [
 		{
-			"nameId": "Amora"
+			"nameId": "blabla",
+			"word": "maçã"
 		},
 		{
-			"nameId": "Manga"
+			"nameId": "blabla1",
+			"word": "banana"
 		},
 		{
-			"nameId": "Ameixa"
+			"nameId": "blabla",
+			"word": "feijão"
 		},
 		{
-			"nameId": "apple"
+			"nameId": "blabl2",
+			"word": "amora"
 		},
 		{
-			"nameId": "Banana"
+			"nameId": "blabla3",
+			"word": "cenoura"
 		},
 		{
-			"nameId": "papaia"
+			"nameId": "blabla4",
+			"word": "caju"
 		},
 		{
-			"nameId": "Caqui"
+			"nameId": "blabla5",
+			"word": "cereja"
 		},
 		{
-			"nameId": "Cereja"
-		}	
+			"nameId": "blabla6",
+			"word": "côco"
+		},
+		{
+			"nameId": "blabla7",
+			"word": "milho"
+		},
+		{
+			"nameId": "blabla8",
+			"word": "pepino"
+		}
 	]
 }

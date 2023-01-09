@@ -1,8 +1,6 @@
 using LearningByPlaying.gameTheme;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ThemeController : MonoBehaviour
