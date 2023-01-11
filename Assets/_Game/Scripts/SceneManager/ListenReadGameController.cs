@@ -5,6 +5,7 @@ using LearningByPlaying.WordWriterSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -55,8 +56,11 @@ namespace LearningByPlaying
         private void StartGame()
         {
             ToggleShowLockScreen();
+            PiecesList piecesList = GetJSONFile();
 
-            piecesSet = Shuffle(CreatePiecesSet(GetJSONFile()));//TODO: COLOCAR METODOS EM CADEIA CreatePiecesSet->Shuffle
+            piecesList = RemovePiecesSaved(piecesList);
+            List<Piece> pieces = CreatePiecesSet(piecesList);
+            piecesSet = Shuffle(pieces);//TODO: COLOCAR METODOS EM CADEIA CreatePiecesSet->Shuffle
             ImageController.Instance.SetImagePieces(piecesSet, choicesPlace);
 
             PieceToChoose = piecesSet[UnityEngine.Random.Range(0, piecesSet.Count)];
@@ -76,6 +80,26 @@ namespace LearningByPlaying
             StartListening();
         }
 
+        private PiecesList RemovePiecesSaved(PiecesList piecesList)
+        {
+            PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            if(piecesListCompleted != null)
+            {
+                foreach (var item in piecesListCompleted.pieces.ToList())
+                {
+                    List<Piece> pieces = piecesList.pieces.ToList();
+                    pieces.RemoveAll(piece => piece.nameId == item.nameId);
+                    piecesList.pieces = pieces.ToArray();
+                }
+            }
+            if(piecesList.pieces.Length < 3)
+            {
+                piecesList.pieces = new List<Piece>().ToArray();
+                GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString());
+                return piecesListCompleted;
+            }
+            return piecesList;
+        }
         private void PlayPieceSoundCoroutine()
         {
             StartCoroutine(PlayPieceSound());
@@ -117,6 +141,7 @@ namespace LearningByPlaying
         {
             ChoiceSlot.OnChoiceFail += Fail;
             ChoiceSlot.OnChoiceSuccess += Sucsess;
+            ChoiceSlot.OnChoiceSuccessChoicePiece += ChoicePiece;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord += PlayPieceSoundCoroutine;
             OnFinishPlayAudioClip += ToggleShowLockScreen;
@@ -131,17 +156,36 @@ namespace LearningByPlaying
         {
             ChoiceSlot.OnChoiceFail -= Fail;
             ChoiceSlot.OnChoiceSuccess -= Sucsess;
+            ChoiceSlot.OnChoiceSuccessChoicePiece -= ChoicePiece;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord -= PlayPieceSoundCoroutine;
             OnFinishPlayAudioClip -= ToggleShowLockScreen;
         }
 
+        private void ChoicePiece(ChoicePiece choicePiece)
+        {
+            PiecesList p = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            Piece item = new Piece();
+            item.nameId = choicePiece.nameId;
+            if(p == null)
+            {
+                p = new PiecesList();
+                p.pieces = new List<Piece>().ToArray();
+            }
+            List<Piece> pieces = p.pieces.ToList();
+            pieces.Add(item);
+
+            p.pieces = pieces.ToArray();
+
+            GameDataManager.WriteFile(p, CurrentGameTheme.GetGameTheme().ToString());
+        }
         private void Sucsess()
         {
             SucessScreen.SetActive(true);
             ScoreManager.Instance.AddPoint();
             AudioController.Instance.PlaySoundSucess();
             WordWriter.OnFinishWriteWord -= PlayPieceSoundCoroutine;
+            GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
         }
 
         private void Fail()
@@ -155,7 +199,7 @@ namespace LearningByPlaying
             var jsonFile = Resources.Load(jsonPath + CurrentGameTheme.GetGameTheme()).ToString();
             piecesSetDebug = JsonUtility.FromJson<PiecesList>(jsonFile);
             return JsonUtility.FromJson<PiecesList>(jsonFile);
-        }
+        }        
 
         private List<Piece> CreatePiecesSet(PiecesList piecesList)
         {
