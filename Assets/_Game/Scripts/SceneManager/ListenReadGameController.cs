@@ -55,7 +55,7 @@ namespace LearningByPlaying
 
         private void StartGame()
         {
-            ToggleShowLockScreen();
+            ShowLockScreen();
             PiecesList piecesList = GetJSONFile();
 
             piecesList = RemovePiecesSaved(piecesList);
@@ -109,7 +109,7 @@ namespace LearningByPlaying
         {
             //string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
             string audioPath = CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty();
-            Debug.Log("audioPath:" + audioPath);
+            Debug.Log("audioPath:" + audioPath+"/"+ PieceToChoose.nameId);
             audioSource.clip = AudioController.Instance.LoadAudio(audioPath, PieceToChoose.nameId);
             AudioController.Instance.PlaySoundPiece();
             yield return new WaitForSeconds(audioSource.clip.length);
@@ -144,7 +144,7 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceSuccessChoicePiece += ChoicePiece;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord += PlayPieceSoundCoroutine;
-            OnFinishPlayAudioClip += ToggleShowLockScreen;
+            OnFinishPlayAudioClip += HideLockScreen;
         }
 
         private void OnDisable()
@@ -159,7 +159,7 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceSuccessChoicePiece -= ChoicePiece;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord -= PlayPieceSoundCoroutine;
-            OnFinishPlayAudioClip -= ToggleShowLockScreen;
+            OnFinishPlayAudioClip -= HideLockScreen;
         }
 
         private void ChoicePiece(ChoicePiece choicePiece)
@@ -227,9 +227,15 @@ namespace LearningByPlaying
             WordWriter.Instance.CleanCharSlotList();
         }
 
-        private void ToggleShowLockScreen()
+        private void ShowLockScreen()
         {
-            LockSceen.SetActive(!LockSceen.activeSelf);
+            Debug.Log("ATIVAR ");
+            LockSceen.SetActive(true);
+        }        
+        private void HideLockScreen()
+        {
+            Debug.Log("Desativar ");
+            LockSceen.SetActive(false);
         }
     }
 }

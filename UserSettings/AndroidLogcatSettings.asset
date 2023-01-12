@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "330072baa2f644c9",
+    "m_SelectedDeviceId": "00ecd4c90904",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "00ecd4c90904",
+        "name": "com.DefaultCompany.com.unity.template.mobile2D",
+        "processId": 5484,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -24,6 +24,24 @@
             "deviceId": "330072baa2f644c9",
             "name": "com.unity3d.mobileremote",
             "processId": 16966,
+            "exited": false
+        },
+        {
+            "deviceId": "00ecd4c90904",
+            "name": "com.android.launcher3",
+            "processId": 16236,
+            "exited": false
+        },
+        {
+            "deviceId": "00ecd4c90904",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 889,
+            "exited": false
+        },
+        {
+            "deviceId": "00ecd4c90904",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 5484,
             "exited": false
         }
     ],

@@ -4,6 +4,8 @@ using LearningByPlaying.GameType;
 using LearningByPlaying.WordWriterSystem;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -90,9 +92,13 @@ namespace LearningByPlaying
 
         private void StartGame()
         {
-            ToggleShowLockScreen();
+            ShowLockScreen();
 
-            piece = SetPieceWord(GetJSONFile());
+
+            PiecesList piecesList = GetJSONFile();
+            piecesList = RemovePiecesSaved(piecesList);
+
+            piece = SetPieceWord(piecesList);
 
             SetImage();
 
@@ -100,6 +106,27 @@ namespace LearningByPlaying
             StartCoroutine(WriteWord());
             SetGoalsQuantity();
             StartListening();
+        }
+
+        private PiecesList RemovePiecesSaved(PiecesList piecesList)
+        {
+            PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            if (piecesListCompleted != null)
+            {
+                foreach (var item in piecesListCompleted.pieces.ToList())
+                {
+                    List<Piece> pieces = piecesList.pieces.ToList();
+                    pieces.RemoveAll(piece => piece.nameId == item.nameId);
+                    piecesList.pieces = pieces.ToArray();
+                }
+            }
+            if (piecesList.pieces.Length < 3)
+            {
+                piecesList.pieces = new List<Piece>().ToArray();
+                GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString());
+                return piecesListCompleted;
+            }
+            return piecesList;
         }
 
         public void SetImage()
@@ -183,7 +210,7 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceSuccess += CheckForProgresse;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord += WordWriterFinished;
-            OnFinishPlayAudioClip += ToggleShowLockScreen;
+            OnFinishPlayAudioClip += HideLockScreen;
         }
 
         private void OnDisable()
@@ -197,7 +224,7 @@ namespace LearningByPlaying
             ChoiceSlot.OnChoiceSuccess -= CheckForProgresse;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord -= WordWriterFinished;
-            OnFinishPlayAudioClip -= ToggleShowLockScreen;
+            OnFinishPlayAudioClip -= HideLockScreen;
         }
 
         private void WordWriterFinished()
@@ -237,9 +264,15 @@ namespace LearningByPlaying
             hlg.enabled = !hlg.enabled;
         }
 
-        private void ToggleShowLockScreen()
+        private void ShowLockScreen()
         {
-            LockSceen.SetActive(!LockSceen.activeSelf);
+            Debug.Log("ATIVAR ");
+            LockSceen.SetActive(true);
+        }
+        private void HideLockScreen()
+        {
+            Debug.Log("Desativar ");
+            LockSceen.SetActive(false);
         }
     }
 }
