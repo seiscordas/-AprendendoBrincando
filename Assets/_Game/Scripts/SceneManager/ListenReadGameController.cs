@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LearningByPlaying
 {
@@ -130,11 +131,13 @@ namespace LearningByPlaying
 
         public void RestartGame()
         {
-            StopListening();
-            StopAllCoroutines();
-            CleanWordFromScene();
-            StartGame();
-            SucessScreen.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //StopListening();
+            //StopAllCoroutines();
+            //CleanWordFromScene();
+            //StartGame();
+            //SucessScreen.SetActive(false);
+            //Scema
         }
 
         private void StartListening()

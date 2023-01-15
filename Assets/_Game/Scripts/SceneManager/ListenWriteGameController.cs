@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace LearningByPlaying
@@ -167,12 +168,15 @@ namespace LearningByPlaying
 
         public void RestartGame()
         {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            /*
             StopListening();
             StopAllCoroutines();
             CleanWordFromScene();
             ToggleAutoAlign();
             StartGame();
             SucessScreen.SetActive(false);
+            */
         }
 
         private void StartCreateChoiceSlots()

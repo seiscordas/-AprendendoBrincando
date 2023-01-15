@@ -21,7 +21,7 @@ namespace LearningByPlaying
             DragDrop.IsOverChoiceSlot = true;
             if (eventData.pointerDrag != null)
             {
-                CheckProgress(eventData);                
+                eventData.dragging = !CheckProgress(eventData);
             }
         }
 
