@@ -273,7 +273,7 @@ namespace LearningByPlaying
                     p.pieces = new List<Piece>().ToArray();
                 }
                 List<Piece> pieces = p.pieces.ToList();
-                pieces.Add(item);
+                pieces.Add(piece);
 
                 p.pieces = pieces.ToArray();
 

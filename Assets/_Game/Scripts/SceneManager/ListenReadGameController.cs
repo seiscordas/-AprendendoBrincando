@@ -67,7 +67,7 @@ namespace LearningByPlaying
             PieceToChoose = piecesSet[UnityEngine.Random.Range(0, piecesSet.Count)];
             choiceSlot.PieceToChoose = PieceToChoose.nameId;
 
-            Debug.Log("PieceToChoose: "+choiceSlot.PieceToChoose);
+            Debug.Log("PieceToChoose: " + choiceSlot.PieceToChoose);
 
             if (CurrentGameType.GetGameType() == GameTypes.Read.ToString())
             {
@@ -84,7 +84,7 @@ namespace LearningByPlaying
         private PiecesList RemovePiecesSaved(PiecesList piecesList)
         {
             PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
-            if(piecesListCompleted != null)
+            if (piecesListCompleted != null)
             {
                 foreach (var item in piecesListCompleted.pieces.ToList())
                 {
@@ -93,7 +93,7 @@ namespace LearningByPlaying
                     piecesList.pieces = pieces.ToArray();
                 }
             }
-            if(piecesList.pieces.Length < 3)
+            if (piecesList.pieces.Length < 3)
             {
                 piecesList.pieces = new List<Piece>().ToArray();
                 GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
@@ -108,9 +108,8 @@ namespace LearningByPlaying
 
         private IEnumerator PlayPieceSound()
         {
-            //string audioPath = (CurrentAudioProperty.GetAudioProperty() != AudioProperties.None.ToString()) ? CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty() : CurrentGameTheme.GetGameTheme();
             string audioPath = CurrentGameTheme.GetGameTheme() + "/" + CurrentAudioProperty.GetAudioProperty();
-            Debug.Log("audioPath:" + audioPath+"/"+ PieceToChoose.nameId);
+            Debug.Log("audioPath:" + audioPath + "/" + PieceToChoose.nameId);
             audioSource.clip = AudioController.Instance.LoadAudio(audioPath, PieceToChoose.nameId);
             AudioController.Instance.PlaySoundPiece();
             yield return new WaitForSeconds(audioSource.clip.length);
@@ -170,7 +169,7 @@ namespace LearningByPlaying
             PiecesList p = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
             Piece item = new Piece();
             item.nameId = choicePiece.nameId;
-            if(p == null)
+            if (p == null)
             {
                 p = new PiecesList();
                 p.pieces = new List<Piece>().ToArray();
@@ -202,7 +201,7 @@ namespace LearningByPlaying
             var jsonFile = Resources.Load(jsonPath + CurrentGameTheme.GetGameTheme()).ToString();
             piecesSetDebug = JsonUtility.FromJson<PiecesList>(jsonFile);
             return JsonUtility.FromJson<PiecesList>(jsonFile);
-        }        
+        }
 
         private List<Piece> CreatePiecesSet(PiecesList piecesList)
         {
@@ -234,7 +233,7 @@ namespace LearningByPlaying
         {
             Debug.Log("ATIVAR ");
             LockSceen.SetActive(true);
-        }        
+        }
         private void HideLockScreen()
         {
             Debug.Log("Desativar ");
