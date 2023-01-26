@@ -13,7 +13,7 @@ public class SucessScreenController : MonoBehaviour
     {
         EnableAutoAlign();
         WordWriter.Instance.CleanCharSlotList();
-        WordWriter.Instance.StartWordWriter("parabens", gameObjectChar, CongratsText, 0.1f);
+        WordWriter.Instance.StartWordWriter("parabéns", gameObjectChar, CongratsText, 0.1f);
         WordWriter.OnFinishWriteWord += DisableAutoAlign;
         WordWriter.OnFinishWriteWord += StartJumpCoroutine;
     }

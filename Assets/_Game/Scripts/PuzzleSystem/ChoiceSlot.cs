@@ -39,8 +39,8 @@ namespace LearningByPlaying
         private void Success(ChoicePiece choicePiece)
         {
             AlignGameObject();
-            OnChoiceSuccessChoicePiece?.Invoke(choicePiece);
             OnChoiceSuccess?.Invoke();
+            OnChoiceSuccessChoicePiece?.Invoke(choicePiece);
         }
 
         private bool CheckProgress(PointerEventData eventData)

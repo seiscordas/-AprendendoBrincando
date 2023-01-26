@@ -83,7 +83,7 @@ namespace LearningByPlaying
 
         private PiecesList RemovePiecesSaved(PiecesList piecesList)
         {
-            PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
             if(piecesListCompleted != null)
             {
                 foreach (var item in piecesListCompleted.pieces.ToList())
@@ -96,7 +96,7 @@ namespace LearningByPlaying
             if(piecesList.pieces.Length < 3)
             {
                 piecesList.pieces = new List<Piece>().ToArray();
-                GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString());
+                GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
                 return piecesListCompleted;
             }
             return piecesList;
@@ -167,7 +167,7 @@ namespace LearningByPlaying
 
         private void ChoicePiece(ChoicePiece choicePiece)
         {
-            PiecesList p = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            PiecesList p = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
             Piece item = new Piece();
             item.nameId = choicePiece.nameId;
             if(p == null)
@@ -180,7 +180,7 @@ namespace LearningByPlaying
 
             p.pieces = pieces.ToArray();
 
-            GameDataManager.WriteFile(p, CurrentGameTheme.GetGameTheme().ToString());
+            GameDataManager.WriteFile(p, CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
         }
         private void Sucsess()
         {
@@ -188,7 +188,7 @@ namespace LearningByPlaying
             ScoreManager.Instance.AddPoint();
             AudioController.Instance.PlaySoundSucess();
             WordWriter.OnFinishWriteWord -= PlayPieceSoundCoroutine;
-            GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            //GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
         }
 
         private void Fail()

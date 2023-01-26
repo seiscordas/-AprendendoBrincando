@@ -111,7 +111,7 @@ namespace LearningByPlaying
 
         private PiecesList RemovePiecesSaved(PiecesList piecesList)
         {
-            PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
+            PiecesList piecesListCompleted = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
             if (piecesListCompleted != null)
             {
                 foreach (var item in piecesListCompleted.pieces.ToList())
@@ -124,7 +124,7 @@ namespace LearningByPlaying
             if (piecesList.pieces.Length < 3)
             {
                 piecesList.pieces = new List<Piece>().ToArray();
-                GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString());
+                GameDataManager.WriteFile(piecesList, CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
                 return piecesListCompleted;
             }
             return piecesList;
@@ -192,8 +192,6 @@ namespace LearningByPlaying
 
         private void CheckForProgresse()
         {
-            goalsQuantity -= 1;
-
             if (goalsQuantity <= 0)
                 Sucsess();
             else
@@ -206,12 +204,14 @@ namespace LearningByPlaying
             ScoreManager.Instance.AddPoint();
             AudioController.Instance.PlaySoundSucess();
             StopListening();
+            //GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString());
         }
 
         private void StartListening()
         {
             ChoiceSlot.OnChoiceFail += Fail;
-            ChoiceSlot.OnChoiceSuccess += CheckForProgresse;
+            //ChoiceSlot.OnChoiceSuccess += CheckForProgresse;
+            ChoiceSlot.OnChoiceSuccessChoicePiece += ChoicePiece;
             ChoiceSlot.OnChoiceFailChoicePiece += ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord += WordWriterFinished;
             OnFinishPlayAudioClip += HideLockScreen;
@@ -225,7 +225,8 @@ namespace LearningByPlaying
         private void StopListening()
         {
             ChoiceSlot.OnChoiceFail -= Fail;
-            ChoiceSlot.OnChoiceSuccess -= CheckForProgresse;
+            //ChoiceSlot.OnChoiceSuccess -= CheckForProgresse;
+            ChoiceSlot.OnChoiceSuccessChoicePiece -= ChoicePiece;
             ChoiceSlot.OnChoiceFailChoicePiece -= ImageController.Instance.ResetImagePiecePosition;
             WordWriter.OnFinishWriteWord -= WordWriterFinished;
             OnFinishPlayAudioClip -= HideLockScreen;
@@ -255,6 +256,30 @@ namespace LearningByPlaying
         {
             Transform[] children = choicesWordPlace.GetComponentsInChildren<Transform>();
             ShuffleAnimate.Animate(WordWriter.Instance.CharSlotList);
+        }
+
+        private void ChoicePiece(ChoicePiece choicePiece)
+        {
+            goalsQuantity--;
+
+            if (goalsQuantity <= 0)
+            {
+                PiecesList p = GameDataManager.ReadFile(CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
+                Piece item = new Piece();
+                item.nameId = choicePiece.nameId;
+                if (p == null)
+                {
+                    p = new PiecesList();
+                    p.pieces = new List<Piece>().ToArray();
+                }
+                List<Piece> pieces = p.pieces.ToList();
+                pieces.Add(item);
+
+                p.pieces = pieces.ToArray();
+
+                GameDataManager.WriteFile(p, CurrentGameTheme.GetGameTheme().ToString() + SceneManager.GetActiveScene().name);
+            }
+            CheckForProgresse();
         }
 
         private void ToggleShowSucessScreen()
